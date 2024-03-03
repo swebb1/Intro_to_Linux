@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Intro_to_Linux"
+  navbar:
+    logo: "images/logo.png"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: 00-intro.qmd
+        text: Introduction
+      - href: 01-start.qmd
+        text: Getting Started
+      - href: 02-filesystem.qmd
+        text: Filesystem
+      - href: 03-files.qmd
+        text: Files
+      - href: 04-processes.qmd
+        text: Processes
+      - href: 05-analysis.qmd
+        text: Analysis
+      - href: 06-scripts.qmd
+        text: Scripts
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    link-external-newwindow: true
+
+editor: visual
+

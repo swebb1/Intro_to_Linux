@@ -1,0 +1,15 @@
+---
+title: "Intro_to_Linux"
+---
+
+This is the homepage for the Introduction to Linux course.
+
+<br>
+
+![](images/logo.png)
+
+</br>
+
+Contact shaun.webb\@ed.ac.uk for more information.
+
+------------------------------------------------------------------------
