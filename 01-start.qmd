@@ -32,7 +32,7 @@ The process of starting a terminal depends on the operating system that you are 
 You can log in to the server by typing the following command in the Terminal, substituting \[USERNAME\] for your account username:
 
 ```{r eval=F}
-ssh [USERNAME]@aabn.ug.edu.gh
+ssh [USERNAME]@bifx-core1.bio.ed.ac.uk
 ```
 
 If you are using MobaXTerm, an alternative way of logging into the server is shown in the [MobaXTerm demo](https://mobaxterm.mobatek.net/demo.html).
@@ -40,10 +40,12 @@ If you are using MobaXTerm, an alternative way of logging into the server is sho
 Once you have typed in your password, you should see some welcome text and a prompt that looks something like this:
 
 ```{r eval=F}
-[USERNAME]@aabn:~$
+[USERNAME]@bifx-core1:~$
 ```
 
-This prompt shows you that you are logged in to the *aabn bioinformatics* server, and that you are in your home directory (which is referred to using the *\~* character on Linux systems).
+This prompt shows that you are logged in to the *bifx-core1 bioinformatics* *server*, and that you are in your home directory (which is referred to using the *\~* character on Linux systems).
+
+Please see our [website](https://drp-hcb-bioinformatics.github.io/DRP-HCB-Bioinformatics/user_policy.html) for more specific instructions on using the DRP-HCB bioinformatics servers.
 
 ### Running basic commands in bash
 
@@ -62,9 +64,9 @@ This prompt shows you that you are logged in to the *aabn bioinformatics* server
 In order to run a command in bash you type the command and then press the return key to execute it. For example, try typing `date` at the prompt and pressing return. You should get something like this:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~$ date
+[USERNAME]@bifx-core1:~$ date
 Wed 31 Jan 09:21:43 GMT 2024
-[USERNAME]@aabn:~$ 
+[USERNAME]@bifx-core1:~$ 
 ```
 
 As you can see, the output of the `date` command is printed on the command line, and then another prompt is shown.
@@ -72,9 +74,9 @@ As you can see, the output of the `date` command is printed on the command line,
 As well as the command name, a command can include 'options' and 'arguments'. For example, try typing `date -d '25 Dec' +%j` at the command line:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~$ date -d '25 Dec' +%j
+[USERNAME]@bifx-core1:~$ date -d '25 Dec' +%j
 360
-[USERNAME]@aabn:~$ 
+[USERNAME]@bifx-core1:~$ 
 ```
 
 In this example, the command includes the following elements:
@@ -90,11 +92,11 @@ Options always have a name, but do not always need to have an associated value. 
 In general, the values of options and arguments are text strings, which are passed directly to the command. If a value contains spaces, you can surround it with quote marks, as in the example above, so that it is recognised as a single value. You can also use the output of one command as an argument to another by enclosing it in backticks \`\`, as in the following example:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~$ echo date
+[USERNAME]@bifx-core1:~$ echo date
 date
-[USERNAME]@aabn:~$ echo `date`
+[USERNAME]@bifx-core1:~$ echo `date`
 Sat 14 Nov 11:25:11 GMT 2020
-[USERNAME]@aabn:~$ 
+[USERNAME]@bifx-core1:~$ 
 ```
 
 *Note:* The above example uses the `echo` command, which outputs the text value of its arguments.
@@ -133,12 +135,12 @@ This displays a more comprehensive hyperlinked manual, which provides detailed i
 Some programs may not have any documentation that is accessible using the `man` or `info` commands. In this case, they may follow the convention of including `--help` or `-h` flags, which will show some usage information. As an example, we can try to find help information about `bedtools`, which is a well known bioinformatics tool that we will look at later in the course:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~$ man bedtools
+[USERNAME]@bifx-core1:~$ man bedtools
 No manual entry for bedtools
 See 'man 7 undocumented' for help when manual pages are not available.
-[USERNAME]@aabn:~$ info bedtools
+[USERNAME]@bifx-core1:~$ info bedtools
 info: No menu item 'bedtools' in node '(dir)Top'
-[USERNAME]@aabn:~$ bedtools --help
+[USERNAME]@bifx-core1:~$ bedtools --help
 bedtools is a powerful toolset for genome arithmetic.
 
 Version:   v2.30.0
@@ -227,9 +229,9 @@ What are the possible completions of 'bed' on the server?
 At the command prompt, type `bed` then press <kbd>Tab</kbd> twice. You should see the following:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~$ bed<Tab><Tab>
+[USERNAME]@bifx-core1:~$ bed<Tab><Tab>
 bed12ToBed6  bedpeToBam   bedToBam     bedToIgv     bedtools
-[USERNAME]@aabn:~$
+[USERNAME]@bifx-core1:~$
 ```
 :::
 

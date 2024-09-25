@@ -1,12 +1,12 @@
 ---
-title: "Intro_to_Linux"
+title: "Introduction to Linux"
 ---
 
-This is the homepage for the Introduction to Linux course.
+This is the homepage for the Introduction to Linux course run by the Bioinformatics Core at the [Discovery Research Platform for Hidden Cell Biology](https://www.ed.ac.uk/biology/drp).
 
 <br>
 
-![](images/logo.png)
+![](images/DRP_banner_transparent2.png)
 
 </br>
 

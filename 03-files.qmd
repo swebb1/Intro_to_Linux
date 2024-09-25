@@ -44,7 +44,7 @@ In this section you will learn how to explore and manipulate files in bash using
 The following example demonstrates how we can explore text files:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ tree
+[USERNAME]@bifx-core1:~/course$ tree
 .
 ├── bioinformatics_on_the_command_line_files
 │   ├── raw_yeast_rnaseq_data.fastq
@@ -54,30 +54,30 @@ The following example demonstrates how we can explore text files:
 └── bioinformatics_on_the_command_line_files.tar.gz
 
 1 directory, 5 files
-[USERNAME]@aabn:~/course$ cat bioinformatics_on_the_command_line_files/README
+[USERNAME]@bifx-core1:~/course$ cat bioinformatics_on_the_command_line_files/README
 This archive contains reference files for the 'Introduction to Bioinformatics on the Command Line' course. In the course you will learn how to build a simple pipeline to analyse some yeast RNA-Seq data using these files. The following files are included:
 
 - raw_yeast_rnaseq_data.fastq: This is a file containing 10,000 raw reads taken from a yeast RNA-Seq experiment
 - yeast_genome.fasta: This file contains the reference genome sequence for yeast (EF4) in fasta format
 - yeast_genes.bed: This file contains the genomic co-ordinates of yeast genes in bed format
-[USERNAME]@aabn:~/course$ less bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+[USERNAME]@bifx-core1:~/course$ less bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
 ...
 <q>
-[USERNAME]@aabn:~/course$ head -5 bioinformatics_on_the_command_line_files/yeast_genome.fasta
+[USERNAME]@bifx-core1:~/course$ head -5 bioinformatics_on_the_command_line_files/yeast_genome.fasta
 >I
 CCACACCACACCCACACACCCACACACCACACCACACACCACACCACACCCACACACACA
 CATCCTAACACTACCCTAACACAGCCCTAATCTAACCCTGGCCAACCTGTCTCTCAACTT
 ACCCTCCATTACCCTGCCTCCACTCGTTACCCTGTCCCATTCAACCATACCACTCCGAAC
 CACCATCCATCCCTCTACTTACTACCACTCACCCACCGTTACCCTCCAATTACCCATATC
-[USERNAME]@aabn:~/course$ tail -5 bioinformatics_on_the_command_line_files/yeast_genome.fasta
+[USERNAME]@bifx-core1:~/course$ tail -5 bioinformatics_on_the_command_line_files/yeast_genome.fasta
 GTGTTTGTTGCACGGCAGTAGCGAGAGACAAGTGGGAAAGAGTAGGATAAAAAGACAATC
 TATAAAAAGTAAACATAAAATAAAGGTAGTAAGTAGCTTTTGGTTGAACATCCGGGTAAG
 AGACAACAGGGCTTGGAGGAGACGTACATGAGGGCTATTTAGGGCTATTTAGGGCTATGT
 AGAAGTGTTGTAGGGCTAAAGAACAGGGTTTCATTTTCATTTTTTTTTTTTAATTTCGGT
 CAGAAA
-[USERNAME]@aabn:~/course$ wc -l bioinformatics_on_the_command_line_files/yeast_genes.bed
+[USERNAME]@bifx-core1:~/course$ wc -l bioinformatics_on_the_command_line_files/yeast_genes.bed
 7126 bioinformatics_on_the_command_line_files/yeast_genes.bed
-[USERNAME]@aabn:~/course$
+[USERNAME]@bifx-core1:~/course$
 ```
 
 The `grep` command can search and filter files:
@@ -91,16 +91,16 @@ The `grep` command can search and filter files:
 -   `grep -v` returns all of the lines that do not match an expression
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ grep format bioinformatics_on_the_command_line_files/README
+[USERNAME]@bifx-core1:~/course$ grep format bioinformatics_on_the_command_line_files/README
 This archive contains reference files for the 'Introduction to Bioinformatics on the Command Line' course. In the course you will learn how to build a simple pipeline to analyse some yeast RNA-Seq data using these files. The following files are included:
 - yeast_genome.fasta: This file contains the reference genome sequence for yeast (EF4) in fasta format
 - yeast_genes.bed: This file contains the genomic co-ordinates of yeast genes in bed format
-[USERNAME]@aabn:~/course$ grep -v format bioinformatics_on_the_command_line_files/README
+[USERNAME]@bifx-core1:~/course$ grep -v format bioinformatics_on_the_command_line_files/README
 
 - raw_yeast_rnaseq_data.fastq: This is a file containing 10,000 raw reads taken from a yeast RNA-Seq experiment
-[USERNAME]@aabn:~/course$ grep -c -E '^>' bioinformatics_on_the_command_line_files/yeast_genome.fasta
+[USERNAME]@bifx-core1:~/course$ grep -c -E '^>' bioinformatics_on_the_command_line_files/yeast_genome.fasta
 17
-[USERNAME]@aabn:~/course$
+[USERNAME]@bifx-core1:~/course$
 
 ```
 
@@ -115,13 +115,13 @@ Compressed files can be unzipped with the `gzip` command:
 
 ```{bash eval=F}
 
-[USERNAME]@aabn:~/course$ gzip -k bioinformatics_on_the_command_line_files/yeast_genome.fasta
-[USERNAME]@aabn:~/course$ ls -lh bioinformatics_on_the_command_line_files/yeast_genome.fasta*
+[USERNAME]@bifx-core1:~/course$ gzip -k bioinformatics_on_the_command_line_files/yeast_genome.fasta
+[USERNAME]@bifx-core1:~/course$ ls -lh bioinformatics_on_the_command_line_files/yeast_genome.fasta*
 -rw-rw-r-- 1 [USERNAME] [USERNAME]  12M Nov 12 12:38 bioinformatics_on_the_command_line_files/yeast_genome.fasta
 -rw-rw-r-- 1 [USERNAME] [USERNAME] 3.7M Nov 12 12:38 bioinformatics_on_the_command_line_files/yeast_genome.fasta.gz
-[USERNAME]@baabn:~/course$ zgrep -c -E '^>' bioinformatics_on_the_command_line_files/yeast_genome.fasta.gz
+[USERNAME]@bifx-core1:~/course$ zgrep -c -E '^>' bioinformatics_on_the_command_line_files/yeast_genome.fasta.gz
 17
-[USERNAME]@aabn:~/course$
+[USERNAME]@bifx-core1:~/course$
 ```
 
 ::: challenge
@@ -169,42 +169,42 @@ Run `grep -v -c -E '^chr' bioinformatics_on_the_command_line_files/yeast_genes.b
 The following example demonstrates how shell redirection works:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ echo zero > output.txt
-[USERNAME]@aabn:~/course$ cat < output.txt
+[USERNAME]@bifx-core1:~/course$ echo zero > output.txt
+[USERNAME]@bifx-core1:~/course$ cat < output.txt
 zero
-[USERNAME]@aabn:~/course$ echo one > output.txt
-[USERNAME]@aabn:~/course$ cat < output.txt
+[USERNAME]@bifx-core1:~/course$ echo one > output.txt
+[USERNAME]@bifx-core1:~/course$ cat < output.txt
 one
-[USERNAME]@aabn:~/course$ echo two >> output.txt
-[USERNAME]@aabn:~/course$ cat < output.txt
+[USERNAME]@bifx-core1:~/course$ echo two >> output.txt
+[USERNAME]@bifx-core1:~/course$ cat < output.txt
 one
 two
-[USERNAME]@aabn:~/course$ cat bioinformatics_on_the_command_line_files/README > cat_readme.out 2> cat_readme.err
-[USERNAME]@aabn:~/course$ head -2 cat_readme.*
+[USERNAME]@bifx-core1:~/course$ cat bioinformatics_on_the_command_line_files/README > cat_readme.out 2> cat_readme.err
+[USERNAME]@bifx-core1:~/course$ head -2 cat_readme.*
 ==> cat_readme.err <==
 
 ==> cat_readme.out <==
 This archive contains reference files for the 'Introduction to Bioinformatics on the Command Line' course. In the course you will learn how to build a simple pipeline to analyse some yeast RNA-Seq data using these files. The following files are included:
 
-[USERNAME]@aabn:~/course$ zcat bioinformatics_on_the_command_line_files/README > zcat_readme.out 2> zcat_readme.err
-[USERNAME]@aabn:~/course$ head -2 zcat_readme.*
+[USERNAME]@bifx-core1:~/course$ zcat bioinformatics_on_the_command_line_files/README > zcat_readme.out 2> zcat_readme.err
+[USERNAME]@bifx-core1:~/course$ head -2 zcat_readme.*
 ==> zcat_readme.err <==
 
 gzip: bioinformatics_on_the_command_line_files/README: not in gzip format
 
 ==> zcat_readme.out <==
-[USERNAME]@aabn:~/course$ zcat bioinformatics_on_the_command_line_files/README > zcat_readme.all 2>&1
-[USERNAME]@aabn:~/course$ cat zcat_readme.all
+[USERNAME]@bifx-core1:~/course$ zcat bioinformatics_on_the_command_line_files/README > zcat_readme.all 2>&1
+[USERNAME]@bifx-core1:~/course$ cat zcat_readme.all
 
 gzip: bioinformatics_on_the_command_line_files/README: not in gzip format
-[USERNAME]@aabn:~/course$ rm -i *cat_readme.* output.txt
+[USERNAME]@bifx-core1:~/course$ rm -i *cat_readme.* output.txt
 rm: remove regular empty file 'cat_readme.err'? y
 rm: remove regular file 'cat_readme.out'? y
 rm: remove regular file 'zcat_readme.all'? y
 rm: remove regular file 'zcat_readme.err'? y
 rm: remove regular empty file 'zcat_readme.out'? y
 rm: remove regular file 'output.txt'? y
-[USERNAME]@aabn:~/course$ 
+[USERNAME]@bifx-core1:~/course$ 
 ```
 
 ### Creating compound commands using pipes
@@ -227,20 +227,20 @@ So far we have discussed simple commands, which consist of a single command name
 Here's how you could do it using simple commands:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ head -40 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq > first_40_lines.tmp
-[USERNAME]@aabn:~/course$ grep -c ACTG first_40_lines.tmp
+[USERNAME]@bifx-core1:~/course$ head -40 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq > first_40_lines.tmp
+[USERNAME]@bifx-core1:~/course$ grep -c ACTG first_40_lines.tmp
 5
-[USERNAME]@aabn:~/course$ rm -i first_40_lines.tmp
+[USERNAME]@bifx-core1:~/course$ rm -i first_40_lines.tmp
 rm: remove regular file 'first_40_lines.tmp'? y
-[USERNAME]@aabn:~/course$ 
+[USERNAME]@bifx-core1:~/course$ 
 ```
 
 Here's how you can do it in a single command using a pipe:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ head -40 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq | grep -c ACTG
+[USERNAME]@bifx-core1:~/course$ head -40 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq | grep -c ACTG
 5
-[USERNAME]@aabn:~/course$ 
+[USERNAME]@bifx-core1:~/course$ 
 ```
 
 Pipes are particularly useful for working with large files, as they remove the need to create large intermediate files, which may take up space. They can also save time, as commands can sometimes start working on the data produced by commands preceding them in the pipeline before they have finished running, and in some cases preceding commands can be terminated early if further outputs are no longer needed.
@@ -251,26 +251,26 @@ Pipes are particularly useful for working with large files, as they remove the n
 In the example below we measure the time it takes to find the first line that contains the character 'A' in a large genome file. We first write all of the matches to a temporary file and then find the first line using `head` as follows:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ time grep A /homes/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa > grepA.tmp
+[USERNAME]@bifx-core1:~/course$ time grep A /homes/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa > grepA.tmp
 
 real	0m36.182s
 user	0m7.831s
 sys	    0m6.377s
-[USERNAME]@aabn:~/course$ time head -1 grepA.tmp
+[USERNAME]@bifx-core1:~/course$ time head -1 grepA.tmp
 gcttcagaataatcatattattctcaaattttgtatcaatataaaaaaaA
 
 real	0m0.008s
 user	0m0.001s
 sys	    0m0.003s
-[USERNAME]@aabn:~/course$ rm -ri grepA.tmp
+[USERNAME]@bifx-core1:~/course$ rm -ri grepA.tmp
 rm: remove regular file 'grepA.tmp'? y
-[USERNAME]@aabn:~/course$ 
+[USERNAME]@bifx-core1:~/course$ 
 ```
 
 We can see that the operation takes just over 36 seconds. In the example below, we pipe the output of the grep command into the head command.
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ time grep A /homes/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa | head -1
+[USERNAME]@bifx-core1:~/course$ time grep A /home/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa | head -1
 gcttcagaataatcatattattctcaaattttgtatcaatataaaaaaaA
 
 real	0m0.011s

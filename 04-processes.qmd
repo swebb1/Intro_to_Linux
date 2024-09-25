@@ -42,7 +42,7 @@ There are a few different ways to explore the processes running on your computer
 We can learn a lot about processes by looking at the output of these commands. For example, if we run the command `ps -fly` we get something like this:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ ps -fly
+[USERNAME]@bifx-core1:~/course$ ps -fly
 S UID         PID   PPID   C  PRI  NI   RSS   SZ    WCHAN  STIME TTY          TIME CMD
 S [USERNAME]  35269 35244  0  80   0    39296 13648 wait   Nov10 pts/5    00:00:04 -bash
 R [USERNAME]  44935 35269  0  80   0    3328  8822  -      10:11 pts/5    00:00:00 ps -fly
@@ -145,22 +145,22 @@ By default, jobs you start in your shell are 'owned' by your current shell sessi
 The following example shows how to move a foreground job to the background and disown it:
 
 ```{bash eval=F}
-[USERNAME]@aabn:~/course$ sleep 10000
+[USERNAME]@bifx-core1:~/course$ sleep 10000
 <Ctrl+z>
 ^Z
 [1]+  Stopped                 sleep 10000
-[USERNAME]@aabn:~/course$ bg %1
+[USERNAME]@bifx-core1:~/course$ bg %1
 [1]+ sleep 10000 &
-[USERNAME]@aabn:~/course$ jobs
+[USERNAME]@bifx-core1:~/course$ jobs
 [1]+  Running                 sleep 10000 &
-[USERNAME]@aabn:~/course$ disown %1
-[USERNAME]@aabn:~/course$ jobs
-[USERNAME]@aabn:~/course$ ps
+[USERNAME]@bifx-core1:~/course$ disown %1
+[USERNAME]@bifx-core1:~/course$ jobs
+[USERNAME]@bifx-core1:~/course$ ps
   PID TTY          TIME CMD
 29621 pts/1    00:00:00 sleep
 37480 pts/1    00:00:00 bash
 40951 pts/1    00:00:00 ps
-[USERNAME]@aabn:~/course$ 
+[USERNAME]@bifx-core1:~/course$ 
 ```
 
 The example shows that when the `sleep 10000` job is disowned it is removed from the `jobs` list, but the process keeps running.

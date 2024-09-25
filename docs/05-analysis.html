@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Intro_to_Linux - Analysis</title>
+<title>Introduction to Linux - Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,11 +17,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -108,7 +79,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -117,8 +94,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -130,56 +109,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/logo.png" alt="" class="navbar-logo">
+    <img src="./images/DRP_Logo_only_square_transparent.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Intro_to_Linux</span>
+    <span class="navbar-title">Introduction to Linux</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./00-intro.html">
- <span class="menu-text">Introduction</span></a>
+    <a class="nav-link" href="./00-intro.html"> 
+<span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./01-start.html">
- <span class="menu-text">Getting Started</span></a>
+    <a class="nav-link" href="./01-start.html"> 
+<span class="menu-text">Getting Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./02-filesystem.html">
- <span class="menu-text">Filesystem</span></a>
+    <a class="nav-link" href="./02-filesystem.html"> 
+<span class="menu-text">Filesystem</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./03-files.html">
- <span class="menu-text">Files</span></a>
+    <a class="nav-link" href="./03-files.html"> 
+<span class="menu-text">Files</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./04-processes.html">
- <span class="menu-text">Processes</span></a>
+    <a class="nav-link" href="./04-processes.html"> 
+<span class="menu-text">Processes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./05-analysis.html" aria-current="page">
- <span class="menu-text">Analysis</span></a>
+    <a class="nav-link active" href="./05-analysis.html" aria-current="page"> 
+<span class="menu-text">Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./06-scripts.html">
- <span class="menu-text">Scripts</span></a>
+    <a class="nav-link" href="./06-scripts.html"> 
+<span class="menu-text">Scripts</span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -216,7 +197,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
+
 </header>
+
 
 
 <script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
@@ -278,19 +261,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In previous sections, we extracted an archive named <code>bioinformatics_on_the_command_line_files.tar.gz</code> into the <code>~/course</code> directory, creating a directory called <code>~/course/bioinformatics_on_the_command_line_files</code>.</p>
 <p>This directory contains a file called <code>yeast_genes.bed</code>, which lists the genomic co-ordinates of 7,126 yeast genes in BED format, and another file called <code>yeast_genome.fasta</code>, which contains the yeast EF4 genome sequence in FASTA format:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> head <span class="at">-5</span> bioinformatics_on_the_command_line_files/yeast_genes.bed</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> head <span class="at">-5</span> bioinformatics_on_the_command_line_files/yeast_genes.bed</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">chrI</span>    334 649 YAL069W .   +</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">chrI</span>    537 792 YAL068W-A   .   +</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">chrI</span>    1806    2169    YAL068C .   <span class="at">-</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">chrI</span>    2479    2707    YAL067W-A   .   +</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">chrI</span>    7234    9016    YAL067C .   <span class="at">-</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> head <span class="at">-5</span> bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> head <span class="at">-5</span> bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>I</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">CCACACCACACCCACACACCCACACACCACACCACACACCACACCACACCCACACACACA</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">CATCCTAACACTACCCTAACACAGCCCTAATCTAACCCTGGCCAACCTGTCTCTCAACTT</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">ACCCTCCATTACCCTGCCTCCACTCGTTACCCTGTCCCATTCAACCATACCACTCCGAAC</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">CACCATCCATCCCTCTACTTACTACCACTCACCCACCGTTACCCTCCAATTACCCATATC</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core2:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="checking-chromosome-names-in-bed-and-fasta-files" class="level4">
 <h4 class="anchored" data-anchor-id="checking-chromosome-names-in-bed-and-fasta-files">Checking chromosome names in BED and FASTA files</h4>
@@ -303,14 +286,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>We can do this as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> cd bioinformatics_on_the_command_line_files</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> cut <span class="at">-f1</span> yeast_genes.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="op">&gt;</span> yeast_genes_bed_chromosomes.list </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> grep <span class="at">-E</span> <span class="st">'^&gt;'</span> yeast_genome.fasta <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c2-</span> <span class="op">&gt;</span> yeast_genome_fasta_chromosomes.list</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> wc <span class="at">-l</span> <span class="pp">*</span>_chromosomes.list</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd bioinformatics_on_the_command_line_files</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> cut <span class="at">-f1</span> yeast_genes.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="op">&gt;</span> yeast_genes_bed_chromosomes.list </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> grep <span class="at">-E</span> <span class="st">'^&gt;'</span> yeast_genome.fasta <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c2-</span> <span class="op">&gt;</span> yeast_genome_fasta_chromosomes.list</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> wc <span class="at">-l</span> <span class="pp">*</span>_chromosomes.list</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">17</span> yeast_genes_bed_chromosomes.list</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">17</span> yeast_genome_fasta_chromosomes.list</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">34</span> total</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> diff yeast_genes_bed_chromosomes.list yeast_genome_fasta_chromosomes.list </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> diff yeast_genes_bed_chromosomes.list yeast_genome_fasta_chromosomes.list </span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">1,17c1,17</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span> chrI</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span> chrII</span>
@@ -347,20 +330,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> XIV</span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> XV</span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> XVI</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can see that there is a mismatch between the chromosome names in the BED and FASTA files. Each chromosome name in the BED file is equivalent to the corresponding name in the FASTA file with ‘chr’ added to the start.</p>
 <p>Before using these files in a bioinformatics analysis, we need to update one of them so that the names match. In the following example we fix the BED file by removing ‘chr’ from the start of each line.</p>
 <p>The example below uses the <code>sed</code> command, which is used to perform a search and replace style substitution on each line in the BED file using a regular expression. Here, as in the previous examples using <code>grep -E</code>, the ‘^’ character is a regular expression character representing the start of the line. We then confirm that the chromosomes are now the same using the <code>diff</code> command. This produces no output, which means that there are no differences between the chromosome lists.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> sed <span class="st">'s/^chr//'</span> yeast_genes.bed <span class="op">&gt;</span> yeast_genes.fixed.bed</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> cut <span class="at">-f1</span> yeast_genes.fixed.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="op">&gt;</span> yeast_genes_fixed_bed_chromosomes.list</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> diff yeast_genes_fixed_bed_chromosomes.list yeast_genome_fasta_chromosomes.list</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> rm <span class="at">-i</span> <span class="pp">*</span>.list</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> sed <span class="st">'s/^chr//'</span> yeast_genes.bed <span class="op">&gt;</span> yeast_genes.fixed.bed</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> cut <span class="at">-f1</span> yeast_genes.fixed.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="op">&gt;</span> yeast_genes_fixed_bed_chromosomes.list</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> diff yeast_genes_fixed_bed_chromosomes.list yeast_genome_fasta_chromosomes.list</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> rm <span class="at">-i</span> <span class="pp">*</span>.list</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'yeast_genes_bed_chromosomes.list'</span><span class="pp">?</span> y</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'yeast_genes_fixed_bed_chromosomes.list'</span><span class="pp">?</span> y</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'yeast_genome_fasta_chromosomes.list'</span><span class="pp">?</span> y</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="manipulating-bed-files-with-awk-and-sort" class="level4">
@@ -368,10 +351,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Many standard formats for representing NGS data take the form of tabular files, in which each line contains a number of fields, separated by a particular character (generally a <em>tab</em> character). The <code>yeast_genes.fixed.bed</code> file generated in the previous example fits this pattern.</p>
 <p>This example demonstrates how to use <code>awk</code> and <code>sort</code> to find the name and length of the longest gene on chromosome ‘I’ in the <code>yeast_genes.fixed.bed</code> file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> awk <span class="at">-F</span><span class="st">'\t'</span> <span class="at">-v</span> OFS=<span class="st">'\t'</span> <span class="st">'$1=="I" {print $4,$3-$2}'</span> yeast_genes.fixed.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k2,2nr</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> awk <span class="at">-F</span><span class="st">'\t'</span> <span class="at">-v</span> OFS=<span class="st">'\t'</span> <span class="st">'$1=="I" {print $4,$3-$2}'</span> yeast_genes.fixed.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k2,2nr</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">YAR050W</span> 4614</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/bioinformatics_on_the_command_line_files$</span> cd ..</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> cd ..</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above example showcases the power of <code>awk</code> in dealing with tabular data. The command <code>awk -F'\t' -v OFS='\t' '$1=="I" {print $4,$3-$2}'</code> can be decomposed as follows:</p>
 <ul>
@@ -394,7 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>
 Solution
 </summary>
-<div class="solution proof">
+<div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span></p>
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
@@ -413,7 +396,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div class="solution proof">
+<div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span></p>
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
@@ -455,8 +438,8 @@ Solution
 </ul>
 <p>This analysis uses the files in the ‘bioinformatics_on_the_command_line_files’ directory that we have already been working with, and can be performed as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> cd ~/course</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> tree</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd ~/course</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
@@ -468,22 +451,22 @@ Solution
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 7 files</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> mkdir analysis</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> cd analysis</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> mkdir 00_source_data</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> cd 00_source_data</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/00_source_data$</span> ln <span class="at">-s</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/00_source_data$</span> cd ..</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> tree</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> mkdir analysis</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd analysis</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> mkdir 00_source_data</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> cd 00_source_data</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/00_source_data$</span> ln <span class="at">-s</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/00_source_data$</span> cd ..</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> tree</span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> 00_source_data</span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 1 file</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> mkdir 01_star_index</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> cd 01_star_index</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/01_star_index$</span> ln <span class="at">-s</span> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/01_star_index$</span> STAR <span class="at">--runThreadN</span> 5 <span class="at">--runMode</span> genomeGenerate <span class="at">--genomeDir</span> . <span class="at">--genomeFastaFiles</span> ./yeast_genome.fasta <span class="at">--genomeSAindexNbases</span> 10</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> mkdir 01_star_index</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> cd 01_star_index</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/01_star_index$</span> ln <span class="at">-s</span> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/01_star_index$</span> STAR <span class="at">--runThreadN</span> 5 <span class="at">--runMode</span> genomeGenerate <span class="at">--genomeDir</span> . <span class="at">--genomeFastaFiles</span> ./yeast_genome.fasta <span class="at">--genomeSAindexNbases</span> 10</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:19:40 ..... started STAR run</span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:19:40 ... starting to generate Genome files</span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:19:40 ... starting to sort Suffix Array. This may take a long time...</span>
@@ -496,8 +479,8 @@ Solution
 <span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:19:50 ... writing Suffix Array to disk ...</span>
 <span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:19:51 ... writing SAindex to disk</span>
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:19:52 ..... finished successfully</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/01_star_index$</span> cd ..</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> tree</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/01_star_index$</span> cd ..</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> tree</span>
 <span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
 <span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
 <span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
@@ -514,17 +497,17 @@ Solution
 <span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> yeast_genome.fasta <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
 <span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> directories, 11 files</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> mkdir 02_aligned_reads</span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> cd 02_aligned_reads</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/02_aligned_reads$</span> STAR <span class="at">--genomeDir</span> ../01_star_index/ <span class="at">--readFilesIn</span> ../00_source_data/raw_yeast_rnaseq_data.fastq <span class="at">--runThreadN</span> 2 <span class="at">--outFileNamePrefix</span> raw_yeast_rnaseq_data. <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> mkdir 02_aligned_reads</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> cd 02_aligned_reads</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/02_aligned_reads$</span> STAR <span class="at">--genomeDir</span> ../01_star_index/ <span class="at">--readFilesIn</span> ../00_source_data/raw_yeast_rnaseq_data.fastq <span class="at">--runThreadN</span> 2 <span class="at">--outFileNamePrefix</span> raw_yeast_rnaseq_data. <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
 <span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:22:24 ..... started STAR run</span>
 <span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:22:24 ..... loading genome</span>
 <span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:22:24 ..... started mapping</span>
 <span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:22:26 ..... finished mapping</span>
 <span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:22:27 ..... started sorting BAM</span>
 <span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 15:22:27 ..... finished successfully</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/02_aligned_reads$</span> cd ..</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> tree</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/02_aligned_reads$</span> cd ..</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> tree</span>
 <span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
 <span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
 <span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
@@ -559,11 +542,11 @@ Solution
 <span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> BAMsort</span>
 <span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="ex">12</span> directories, 19 files</span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> mkdir 03_coverage</span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> cd 03_coverage</span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/03_coverage$</span> bedtools genomecov <span class="at">-ibam</span> ../02_aligned_reads/raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam <span class="at">-bg</span> <span class="op">&gt;</span> raw_yeast_rnaseq_data.genomecov.bg</span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/03_coverage$</span> cd ..</span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> tree</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> mkdir 03_coverage</span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> cd 03_coverage</span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/03_coverage$</span> bedtools genomecov <span class="at">-ibam</span> ../02_aligned_reads/raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam <span class="at">-bg</span> <span class="op">&gt;</span> raw_yeast_rnaseq_data.genomecov.bg</span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/03_coverage$</span> cd ..</span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> tree</span>
 <span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
 <span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
 <span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
@@ -595,12 +578,12 @@ Solution
 <span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> raw_yeast_rnaseq_data.genomecov.bg</span>
 <span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a><span class="ex">11</span> directories, 17 files</span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> mkdir 04_gene_overlap_counts</span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> cd 04_gene_overlap_counts</span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/04_gene_overlap_counts$</span> ln <span class="at">-s</span> ../../bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed</span>
-<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/04_gene_overlap_counts$</span> bedtools intersect <span class="at">-c</span> <span class="at">-a</span> yeast_genes.fixed.bed <span class="at">-b</span> ../02_aligned_reads/raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'$7&gt;0'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k7,7nr</span> <span class="op">&gt;</span> raw_yeast_overlap_data.gene_overlap_counts.bed</span>
-<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis/04_gene_overlap_counts$</span> cd ..</span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> tree</span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> mkdir 04_gene_overlap_counts</span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> cd 04_gene_overlap_counts</span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/04_gene_overlap_counts$</span> ln <span class="at">-s</span> ../../bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/04_gene_overlap_counts$</span> bedtools intersect <span class="at">-c</span> <span class="at">-a</span> yeast_genes.fixed.bed <span class="at">-b</span> ../02_aligned_reads/raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'$7&gt;0'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k7,7nr</span> <span class="op">&gt;</span> raw_yeast_overlap_data.gene_overlap_counts.bed</span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis/04_gene_overlap_counts$</span> cd ..</span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> tree</span>
 <span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
 <span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
 <span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
@@ -635,7 +618,7 @@ Solution
 <span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> yeast_genes.fixed.bed <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed</span>
 <span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a><span class="ex">12</span> directories, 19 files</span>
-<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> head <span class="at">-10</span> 04_gene_overlap_counts/raw_yeast_overlap_data.gene_overlap_counts.bed</span>
+<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> head <span class="at">-10</span> 04_gene_overlap_counts/raw_yeast_overlap_data.gene_overlap_counts.bed</span>
 <span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 460922  466869  RDN37-2 .   <span class="at">-</span>   3730</span>
 <span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 451785  457732  RDN37-1 .   <span class="at">-</span>   3582</span>
 <span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 468812  468931  RDN5-2  .   +   3063</span>
@@ -646,8 +629,8 @@ Solution
 <span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 482058  482190  YLR157C-C   .   <span class="at">-</span>   3055</span>
 <span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 485696  485815  RDN5-5  .   +   3052</span>
 <span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 485710  485842  YLR159C-A   .   <span class="at">-</span>   3052</span>
-<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course/analysis$</span> cd ..</span>
-<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/analysis$</span> cd ..</span>
+<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>Note:</em> In this analysis we have done everything from scratch, including creating the genome index. For real analyses it is a good idea to use a pre-generated index, as indices for larger genomes take up a lot of space on the server.</p>
 <div class="challenge">
@@ -659,7 +642,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div class="solution proof">
+<div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span></p>
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
@@ -667,12 +650,12 @@ Solution
 <p>Running <code>bedtools getfasta --help</code> shows us that we need to specify an input DNA FASTA file and a BED file with the feature co-ordinates. <br> We can extract the feature co-ordinates of YAR050W from <code>yeast_genes.fixed.bed</code> using <code>grep or awk</code>, and use the output of this command with <code>bedtools getfasta</code>. An example is illustrated in the following example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> cd ~/course</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> grep <span class="st">"YAR050W"</span> bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed <span class="op">&gt;</span> YAR050W.bed</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> bedtools getfasta <span class="at">-fi</span> bioinformatics_on_the_command_line_files/yeast_genome.fasta <span class="at">-bed</span> YAR050W.bed</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd ~/course</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> grep <span class="st">"YAR050W"</span> bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed <span class="op">&gt;</span> YAR050W.bed</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> bedtools getfasta <span class="at">-fi</span> bioinformatics_on_the_command_line_files/yeast_genome.fasta <span class="at">-bed</span> YAR050W.bed</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>I:203402-208016</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">ATGACAATGCCTCATCGCTATATGTTTTTGGCAGTCTTTACACTTCTGGCACTAACTA...</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@aabn:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </details>
@@ -709,9 +692,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -747,10 +744,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -760,8 +779,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -773,9 +801,245 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -813,23 +1077,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
