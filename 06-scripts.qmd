@@ -335,6 +335,7 @@ RAW_FASTQ='~/course/bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_da
 GENOME_FASTA='~/course/bioinformatics_on_the_command_line_files/yeast_genome.fasta'
 GENES_BED='~/course/bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed'
 
+## Check files exist - this will send an error if not found
 ls "$RAW_FASTQ" "$GENOME_FASTA" "$GENES_BED" > /dev/null
 
 RAW_FASTQ_BASENAME_PREFIX=`basename $RAW_FASTQ .fastq`

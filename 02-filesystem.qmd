@@ -233,7 +233,12 @@ Everyone on the server can read the file. The user that owns the file can read a
 <h2><i class="fas fa-thumbtack"></i> Key Points</h2>
 
 -   `cd` changes the current working directory
+    -   Use `cd path` to move to a specified directory e.g. `cd /library/training`
+    -   Use `cd ..` to move up a directory
+    -   Use `cd` without an argument to return to your home directory
+-   `dirs` lists a history of directories you have moved between
 -   The `ls` command lists the files in the current working directory
+-   The `tree` command provides a readable summary of the files in the current directory and its subdirectories
 -   The `find` command recursively searches for files in the current file system
 :::
 
@@ -261,6 +266,34 @@ drwxr-xr-x 2 bifxadmin bifxadmin  512 Sep 25 13:19 genomes
 genomes/mouse/mm10/cpg_islands.bed
 genomes/mouse/mm10/genes.bed
 genomes/mouse/mm10/repeats.bed
+[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$ tree
+.
+├── analysis_improved.sh
+├── analysis_raw.sh
+├── bioinformatics_on_the_command_line_files
+│   ├── raw_yeast_rnaseq_data.fastq
+│   ├── README
+│   ├── yeast_genes.bed
+│   └── yeast_genome.fasta
+├── bioinformatics_on_the_command_line_files.tar.gz
+├── file name with spaces
+├── genomes
+│   ├── human
+│   │   └── hg38
+│   │       └── genome.fa
+│   └── mouse
+│       ├── GRCm38
+│       ├── mm10
+│       │   ├── cpg_islands.bed
+│       │   ├── genes.bed
+│       │   ├── genome.fa
+│       │   └── repeats.bed
+│       ├── mm9
+│       │   └── genome.fa
+│       └── UCSC
+└── sequences.fa
+
+9 directories, 15 files
 [USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$ cd
 [USERNAME]@bifx-core1:~$ 
 

@@ -18,7 +18,7 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ------------------------------------------------------------------------
 
-In this section you will learn how to log into a remote server and run some simple commands. You will also learn how to find out about commands, and how to use bash efficiently.
+In this section you will learn how to log in to a remote server and run some simple commands. You will also learn how to find out about commands, and how to use bash efficiently.
 
 ### Starting a Terminal and logging in to the remote server
 
@@ -137,7 +137,6 @@ Some programs may not have any documentation that is accessible using the `man` 
 ```{bash eval=F}
 [USERNAME]@bifx-core1:~$ man bedtools
 No manual entry for bedtools
-See 'man 7 undocumented' for help when manual pages are not available.
 [USERNAME]@bifx-core1:~$ info bedtools
 info: No menu item 'bedtools' in node '(dir)Top'
 [USERNAME]@bifx-core1:~$ bedtools --help
@@ -226,13 +225,7 @@ What are the possible completions of 'bed' on the server?
 ::: solution
 <h2><i class="far fa-eye"></i> Solution:</h2>
 
-At the command prompt, type `bed` then press <kbd>Tab</kbd> twice. You should see the following:
-
-```{bash eval=F}
-[USERNAME]@bifx-core1:~$ bed<Tab><Tab>
-bed12ToBed6  bedpeToBam   bedToBam     bedToIgv     bedtools
-[USERNAME]@bifx-core1:~$
-```
+At the command prompt, type `bed` then press <kbd>Tab</kbd> twice. You should see many possible options.
 :::
 
 </details>
