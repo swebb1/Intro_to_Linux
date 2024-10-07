@@ -99,7 +99,7 @@ Sat 14 Nov 11:25:11 GMT 2020
 [USERNAME]@bifx-core1:~$ 
 ```
 
-*Note:* The above example uses the `echo` command, which outputs the text value of its arguments.
+The above example uses the `echo` command, which outputs the text value of its arguments. In the first instance it simply prints the word 'date'. In the second instance, it runs the command within the backticks first, then prints the output of this command.
 
 ### Finding out about bash commands
 
@@ -199,18 +199,19 @@ You can also use <kbd>Ctrl+c</kbd> to terminate the command that is currently ru
 
 Tab completion allows you to type part of a command name followed by the <kbd>Tab</kbd> key, which prompts bash to guess the rest of the command name based on the commands that are available on the system.
 
-For instance, if you want to run the *bedtools* command on the server, you can type *bedt* followed by <kbd>Tab</kbd>, and the rest of the command name will be filled in for you.
+For instance, if you want to run the *bedtools* command on the server, you can type *bedtoo* followed by <kbd>Tab</kbd>, and the rest of the command name will be filled in for you.
 
 Typing <kbd>Tab</kbd> once to complete a command name only works if there is only one possible way to complete the name. If there are multiple options and you would like to see them, you can type <kbd>Tab</kbd> twice, and the possible completions will be displayed.
 
 #### Using the bash history
 
-A particularly useful feature of command line shells is the ability to look back at previous commands that you have run. In bash you can access these commands using the `history` command. Typing `history` will show you a numbered list of commands you've run recently. You can also specify the number of previous commands you'd like to see by including it as an argument.
+A particularly useful feature of command line shells is the ability to look back at previous commands that you have run. In bash you can access these commands using the `history` command. Typing `history` will show you a numbered list of commands you've run recently.
 
 There are a few useful tricks that make it easy to find and run commands that you have run before:
 
 -   Scrolling through the history with the up and down arrows
 -   Searching the history with <kbd>Ctrl+r</kbd> (reverse-i-search)
+    -   Enter text and use <kbd>Ctrl+r</kbd> again to cycle through results
 -   Re-running a previously run command with ! followed by the number of the command
 
 ::: challenge

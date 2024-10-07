@@ -78,13 +78,13 @@ file name with spaces
 [USERNAME]@bifx-core1:~$
 ```
 
-*Note:* Tab completion works with filenames as well as command names.
+*Note:* Tab completion works with file and directory names as well as command names. Try to use the command above by typing `basename /libr` and using tab completion to find the file `file name with spaces`.
 
 The `pwd` command shows the absolute path of the current working directory:
 
 ```{bash eval=F}
 [USERNAME]@bifx-core1:~$ pwd
-/home/[USERNAME]
+/datastore/home/[USERNAME]
 [USERNAME]@bifx-core1:~$
 ```
 
@@ -103,11 +103,11 @@ The `realpath` command can be used to show the absolute path corresponding to a 
 
 ```{bash eval=F}
 [USERNAME]@bifx-core1:~$ realpath ~
-/home/[USERNAME]
+/datastore/home/[USERNAME]
 [USERNAME]@bifx-core1:~$ realpath .
-/home/[USERNAME]
+/datastore/home/[USERNAME]
 [USERNAME]@bifx-core1:~$ realpath ..
-/home
+/datastore/home
 [USERNAME]@bifx-core1:~$ 
 ```
 
@@ -121,7 +121,32 @@ Linux also makes it possible to include wildcards in file paths, making it possi
     -   for example, \[aA\] would match 'a' or 'A'
     -   ranges of numbers are allowed, so \[1-5\] matches 1, 2, 3, 4, or 5
 
-When bash sees a glob pattern, it expands it into a list of file paths that match the pattern (separated by spaces). A convenient way to experiment with glob patterns (and to make sure they match the files you want them to) is to use the `echo` command, which prints its arguments to the command line:
+When bash sees a glob pattern, it expands it into a list of file paths that match the pattern (separated by spaces).
+
+First, let's look at the structure of files and folders in the directory `/library/training/Intro_to_Linux/genomes` by using the `tree` command:
+
+```{bash eval=F}
+[USERNAME]@bifx-core1:~$ tree /library/training/Intro_to_Linux/genomes
+/library/training/Intro_to_Linux/genomes
+├── human
+│   └── hg38
+│       └── genome.fa
+└── mouse
+    ├── GRCm38
+    ├── mm10
+    │   ├── cpg_islands.bed
+    │   ├── genes.bed
+    │   ├── genome.fa
+    │   └── repeats.bed
+    ├── mm9
+    │   └── genome.fa
+    └── UCSC
+[USERNAME]@bifx-core1:~$
+```
+
+This contains two sub-folders, human and mouse. Within each, there are further sub-folders for different genome versions. Some of these contain files with genome sequence and annotation data.
+
+A convenient way to experiment with glob patterns (and to make sure they match the files you want them to) is to use the `echo` command, which prints its arguments to the command line:
 
 ```{bash eval=F}
 [USERNAME]@bifx-core1:~$ echo /library/training/Intro_to_Linux/genomes/*
@@ -145,7 +170,11 @@ Create a glob pattern that matches /library/training/Intro_to_Linux/genomes/mous
 ::: solution
 <h2><i class="far fa-eye"></i> Solution:</h2>
 
-One option would be /library/training/Intro_to_Linux/genomes/mouse/\[GU\]\*
+One option would be find folders that start with G or U:\
+/library/training/Intro_to_Linux/genomes/mouse/\[GU\]\*
+
+Another is to find folders that start with a capital letter by specifying the range A-Z:\
+/library/training/Intro_to_Linux/genomes/mouse/\[A-Z\]\*
 :::
 
 </details>
@@ -165,7 +194,8 @@ Create a glob pattern that matches everything in /library/training/Intro_to_Linu
 ::: solution
 <h2><i class="far fa-eye"></i> Solution:</h2>
 
-One option would be /library/training/Intro_to_Linux/genomes/mouse/*\*\[0-9\]*
+One option would be to match folders which contain a number anywhere in the name:\
+/library/training/Intro_to_Linux/genomes/mouse/*\*\[0-9\]\**
 :::
 
 </details>
@@ -188,7 +218,7 @@ As well as its name and path, each file has a number of attributes associated wi
   File: ‘sequences.fa’
   Size: 135       	Blocks: 1          IO Block: 8192   regular file
 Device: 27h/39d	Inode: 1003792241  Links: 1
-Access: (0644/-rw-r--r--)  Uid: ( 5000/bifxadmin)   Gid: (  505/bifxadmin)
+Access: (0644/-rw-r--r--)  Uid: ( 500/user1)   Gid: (  50/group1)
 Access: 2024-09-25 13:09:35.836470000 +0100
 Modify: 2024-09-25 13:09:35.837141876 +0100
 Change: 2024-09-25 13:10:28.019841000 +0100
@@ -200,12 +230,16 @@ The output of the `stat` command shows us:
 
 -   What type of file this is (a regular file)
 -   The size of the file (135 bytes)
--   The identity and group of the owner of the file (bifxadmin)
+-   The identity and group of the owner of the file (user1 and group1)
 -   When the file was last accessed, modified, and changed
--   The permissions on the file (-rw-r--r--)
+-   The permissions on the file: Access: (0644/-rw-r--r--)
+    -   The permission string is -rw-r--r--
     -   The first character of the permission string tells us whether it is a file or directory
     -   The rest of the string can be divided into three groups (rw-, r--, and r--), representing the permissions granted to the user that owns the file, the group associated with the file, and all users
+    -   Groups are sets of users. Permissions can be set by group to give multiple users access to the same files.
     -   There are three types of permission. These are permission to read the file (`r`), permission to write to the file (`w`), and permission to execute the file (`x`)
+
+File permissions can be altered with the `chmod` command. You can read more about setting permissions [here](https://docs.oracle.com/cd/E19504-01/802-5750/6i9g464pv/index.html).
 
 ::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
@@ -301,6 +335,14 @@ genomes/mouse/mm10/repeats.bed
 
 *Note:* In this example we have used the command `ls -lah`. This is an example of a shorthand that you can use in the bash shell when specifying multiple flags. `ls -lah` is equivalent to `ls -l -a -h`.
 
+-   `-l` list files and show attributes
+
+-   `-a` show all files (including hidden files)
+
+-   `-h` show file size in human readable format
+
+Play around with the `ls` command to see how it behaves differently without these options.
+
 ::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
@@ -313,7 +355,10 @@ List all of the paths to files named 'genome.fa' in the directory '/library/trai
 ::: solution
 <h2><i class="far fa-eye"></i> Solution:</h2>
 
-Run `find /library/training/Intro_to_Linux/genomes/mouse/ -type f -name 'genome.fa'`
+Run `find /library/training/Intro_to_Linux/genomes -type f -name 'genome.fa'`
+
+Or, because we know where they are in the tree:\
+ls `/library/training/Intro_to_Linux/genomes/*/*/genome.fa`
 :::
 
 </details>
@@ -333,9 +378,13 @@ Using the commands you've learned in this section, explore the `/library/trainin
 ::: solution
 <h2><i class="far fa-eye"></i> Solution:</h2>
 
-Run `ls /library/training/Intro_to_Linux/genomes/` to list the organisms in that folder.
+Run `ls /library/training/Intro_to_Linux/genomes/*` to list the contents of each directory in the genomes folder.
+
+OR
 
 Run `find /library/training/Intro_to_Linux/genomes/ -maxdepth 2 -type d` to list the sub-directories of the directories representing the organisms, which represent genome releases.
+
+There is always more than one way to do things in Linux!
 :::
 
 </details>
@@ -348,11 +397,18 @@ Run `find /library/training/Intro_to_Linux/genomes/ -maxdepth 2 -type d` to list
 ::: key-points
 <h2><i class="fas fa-thumbtack"></i> Key Points</h2>
 
--   Files can be created using `touch`, by a text editor, or by redirecting the output of a program
+-   Files can be created using:
+    -   `touch`, a command to create an empty file
+    -   A Unix text editor, like `emacs` or `vim`
+    -   By redirecting the output of a program into a new file (we will do this later)
 -   Symbolic links can be created using `ln -s`
+    -   A symbolic link is a shortcut to a file or directory that exists elsewhere
+    -   On the bifx servers /home is a symbolic link to /datastore/home
+        -   Check this by running `ls -lh /home`
 -   Directories can be created using `mkdir`, and empty directories can be removed using `rmdir`
--   The `rm` command can be used to delete files, links, and directories along with their contents (using the `-r` flag)
-    -   There is no recycle bin in Linux, so `rm` should be used with care. The `-i` flag can be used to prompt for confirmation before deleting files
+-   The `rm` command can be used to delete files, links, and directories along with their contents (using the `-r` flag to recursively delete the contents of a directory)
+    -   There is no recycle bin in Linux, so `rm` should be used with care!
+    -   The `-i` flag can be used to prompt for confirmation before deleting files
 :::
 
 <br>
@@ -437,7 +493,7 @@ The example demonstrates a number of commands:
 -   `touch` to create an empty file
     -   This can also be used to update the timestamp on an existing file
 -   `mkdir` to create empty directories
-    -   Add -p to create nested directories by specifying paths
+    -   Add -p when create nested directories that don't exist yet e.g. dir3/dir4
 -   `ln -s` to create a symbolic link to a file or directory
 -   `rmdir` to delete empty directories, without deleting files or non-empty directories
 -   `rm` command
@@ -533,12 +589,6 @@ rm: remove regular file 'README.txt'? y
 └── bioinformatics_on_the_command_line_files.tar.gz
 
 1 directory, 5 files
-[USERNAME]@bifx-core1:~/course$ chmod a-w bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
-[USERNAME]@bifx-core1:~/course$ ls -lah bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
-
-[USERNAME]@bifx-core1:~/course$ rm bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
-rm: remove write-protected regular file 'bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq'? n
-[USERNAME]@bifx-core1:~/course$
 ```
 
 This example has demonstrated a number of commands:
@@ -546,7 +596,23 @@ This example has demonstrated a number of commands:
 -   `cp` to copy files and directories (with the `-r` flag set)
     -   The `-a` flag will preserve file attributes when they are copied
 -   `mv` to move files or directories
--   `chmod` to change the permissions on a file
-    -   It's always a good idea to make raw data files read only as we did in the example, as it makes it more difficult to remove or overwrite them accidentally
-    -   the `a-w` argument removes `w`rite access for `a`ll users.
-    -   Check the `chmod` man page for more details on how to change file permissions. For now it is fine to just know this is possible.
+    -   The second argument to `mv` is the destination. This can be:
+        -   A file path to rename the file e.g. `mv file1.txt ../dir1/file2.txt`
+        -   A directory path to move the file and keep the original name e.g. `mv file1.txt ../dir1/`
+
+File permissions can be altered using the `chmod` command.
+
+-   It's always a good idea to make raw data files read only as it makes it more difficult to remove or overwrite them accidentally
+-   the `a-w` argument removes `w`rite access for `a`ll users
+-   Check the `chmod` man page for more details on how to change file permissions. For now it is fine to just know this is possible.
+
+```{bash eval=F}
+[USERNAME]@bifx-core1:~/course$ ls -lah bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+-rw-r--r-- 1 [USERNAME] [USERNAME] 1.5M Nov 12  2020 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+[USERNAME]@bifx-core1:~/course$ chmod a-w bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+[USERNAME]@bifx-core1:~/course$ ls -lah bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+-r--r--r-- 1 [USERNAME] [USERNAME] 1.5M Nov 12  2020 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+[USERNAME]@bifx-core1:~/course$ rm bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+rm: remove write-protected regular file 'bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq'? n
+[USERNAME]@bifx-core1:~/course$
+```
