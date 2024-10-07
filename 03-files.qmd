@@ -30,6 +30,7 @@ In this section you will learn how to explore and manipulate files in bash using
 -   Regular files in Linux can be classified as text files, which contain human readable text, and binary files, that contain data that is not human readable
 -   The `cat` command can be used to show the contents of a file
     -   The `less` command allows you to page through a large file
+        -   Hit `q` to exit the `less` command
 -   The `head` and `tail` commands can be used to show the first or last few lines of a file
     -   These can be useful for large text files
 -   The `wc -l` command counts the number of lines in a file
@@ -111,7 +112,13 @@ This archive contains reference files for the 'Introduction to Bioinformatics on
 -   `.*` represents a sequence of zero or more characters
 -   `.+` represents a sequence of one or more characters
 
-Compressed files can be unzipped with the `gzip` command:
+Files can be zipped (compressed) and unzipped (decompressed) with the `gzip` command:
+
+-   `gzip -k` will compress a file and keep the original uncompressed version
+
+-   `gzip -d` will decompress a gzip'd file
+
+-   `zless`, `zcat` and `zgrep` work on compressed files
 
 ```{bash eval=F}
 
