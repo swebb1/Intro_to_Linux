@@ -255,13 +255,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Use <code>htop</code> to find the following:</p>
 <ul>
 <li>
-How many cores does the server have?
+How much memory does the server have?
 </li>
 <li>
-How much memory does it have?
-</li>
-<li>
-What is the process ID of the <code>htop</code> process?
+What is the process ID of the <code>htop</code> process? Use the <code>-u</code> argument plus your username to only list your own processes.
 </li>
 </ul>
 <details>
@@ -273,7 +270,7 @@ Solution
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
 </h2>
-<p>Run <code>htop -u [USERNAME]</code> to start <code>htop</code> and display only your own processes. At the top of the <code>htop</code> screen there is a bar chart style representation of each of the cores on the server, showing how busy each core is. The server has 64 cores. There is also a bar entitled <em>Mem</em>, with the total memory shown to its right. The server has 250G of memory. The process ID of <code>htop</code> is in the first column.</p>
+<p>Run <code>htop -u [USERNAME]</code> to start <code>htop</code> and display only your own processes. At the top of the <code>htop</code> screen there is a bar chart style representation of average CPU and memory load. The server has 503G of memory. The process ID of <code>htop</code> is in the first column.</p>
 </div>
 </details>
 </div>

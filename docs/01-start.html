@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
 
 <hr>
-<p>In this section you will learn how to log into a remote server and run some simple commands. You will also learn how to find out about commands, and how to use bash efficiently.</p>
+<p>In this section you will learn how to log in to a remote server and run some simple commands. You will also learn how to find out about commands, and how to use bash efficiently.</p>
 <section id="starting-a-terminal-and-logging-in-to-the-remote-server" class="level3">
 <h3 class="anchored" data-anchor-id="starting-a-terminal-and-logging-in-to-the-remote-server">Starting a Terminal and logging in to the remote server</h3>
 <hr>
@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Sat</span> 14 Nov 11:25:11 GMT 2020</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Note:</em> The above example uses the <code>echo</code> command, which outputs the text value of its arguments.</p>
+<p>The above example uses the <code>echo</code> command, which outputs the text value of its arguments. In the first instance it simply prints the word ‘date’. In the second instance, it runs the command within the backticks first, then prints the output of this command.</p>
 </section>
 </section>
 <section id="finding-out-about-bash-commands" class="level3">
@@ -315,14 +315,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> man bedtools</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">No</span> manual entry for bedtools</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">See</span> <span class="st">'man 7 undocumented'</span> for help when manual pages are not available.</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> info bedtools</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">info:</span> No menu item <span class="st">'bedtools'</span> in node <span class="st">'(dir)Top'</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> bedtools <span class="at">--help</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> is a powerful toolset for genome arithmetic.</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Version:</span>   v2.30.0</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> info bedtools</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">info:</span> No menu item <span class="st">'bedtools'</span> in node <span class="st">'(dir)Top'</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> bedtools <span class="at">--help</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span> is a powerful toolset for genome arithmetic.</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Version:</span>   v2.30.0</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="challenge">
 <h2 class="anchored" data-anchor-id="help-and--h-flags">
@@ -379,16 +378,19 @@ To check the day of the year for today just run:</p>
 <section id="tab-completion" class="level4">
 <h4 class="anchored" data-anchor-id="tab-completion">Tab completion</h4>
 <p>Tab completion allows you to type part of a command name followed by the <kbd>Tab</kbd> key, which prompts bash to guess the rest of the command name based on the commands that are available on the system.</p>
-<p>For instance, if you want to run the <em>bedtools</em> command on the server, you can type <em>bedt</em> followed by <kbd>Tab</kbd>, and the rest of the command name will be filled in for you.</p>
+<p>For instance, if you want to run the <em>bedtools</em> command on the server, you can type <em>bedtoo</em> followed by <kbd>Tab</kbd>, and the rest of the command name will be filled in for you.</p>
 <p>Typing <kbd>Tab</kbd> once to complete a command name only works if there is only one possible way to complete the name. If there are multiple options and you would like to see them, you can type <kbd>Tab</kbd> twice, and the possible completions will be displayed.</p>
 </section>
 <section id="using-the-bash-history" class="level4">
 <h4 class="anchored">Using the bash history</h4>
-<p>A particularly useful feature of command line shells is the ability to look back at previous commands that you have run. In bash you can access these commands using the <code>history</code> command. Typing <code>history</code> will show you a numbered list of commands you’ve run recently. You can also specify the number of previous commands you’d like to see by including it as an argument.</p>
+<p>A particularly useful feature of command line shells is the ability to look back at previous commands that you have run. In bash you can access these commands using the <code>history</code> command. Typing <code>history</code> will show you a numbered list of commands you’ve run recently.</p>
 <p>There are a few useful tricks that make it easy to find and run commands that you have run before:</p>
 <ul>
 <li>Scrolling through the history with the up and down arrows</li>
-<li>Searching the history with <kbd>Ctrl+r</kbd> (reverse-i-search)</li>
+<li>Searching the history with <kbd>Ctrl+r</kbd> (reverse-i-search)
+<ul>
+<li>Enter text and use <kbd>Ctrl+r</kbd> again to cycle through results</li>
+</ul></li>
 <li>Re-running a previously run command with ! followed by the number of the command</li>
 </ul>
 <div class="challenge">
@@ -405,12 +407,7 @@ Solution
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
 </h2>
-<p>At the command prompt, type <code>bed</code> then press <kbd>Tab</kbd> twice. You should see the following:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> bed<span class="op">&lt;</span>Tab<span class="op">&gt;&lt;</span>Tab<span class="op">&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bed12ToBed6</span>  bedpeToBam   bedToBam     bedToIgv     bedtools</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>At the command prompt, type <code>bed</code> then press <kbd>Tab</kbd> twice. You should see many possible options.</p>
 </div>
 </details>
 </div>

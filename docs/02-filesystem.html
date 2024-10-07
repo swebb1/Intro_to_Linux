@@ -266,11 +266,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">file</span> name with spaces</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Note:</em> Tab completion works with filenames as well as command names.</p>
+<p><em>Note:</em> Tab completion works with file and directory names as well as command names. Try to use the command above by typing <code>basename /libr</code> and using tab completion to find the file <code>file name with spaces</code>.</p>
 <p>The <code>pwd</code> command shows the absolute path of the current working directory:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> pwd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/[USERNAME]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/datastore/home/[USERNAME]</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -289,11 +289,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <code>realpath</code> command can be used to show the absolute path corresponding to a relative path:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> realpath ~</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/[USERNAME]</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/datastore/home/[USERNAME]</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> realpath .</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/[USERNAME]</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/datastore/home/[USERNAME]</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> realpath ..</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">/home</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">/datastore/home</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -309,15 +309,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>ranges of numbers are allowed, so [1-5] matches 1, 2, 3, 4, or 5</li>
 </ul></li>
 </ul>
-<p>When bash sees a glob pattern, it expands it into a list of file paths that match the pattern (separated by spaces). A convenient way to experiment with glob patterns (and to make sure they match the files you want them to) is to use the <code>echo</code> command, which prints its arguments to the command line:</p>
+<p>When bash sees a glob pattern, it expands it into a list of file paths that match the pattern (separated by spaces).</p>
+<p>First, let’s look at the structure of files and folders in the directory <code>/library/training/Intro_to_Linux/genomes</code> by using the <code>tree</code> command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> echo /library/training/Intro_to_Linux/genomes/<span class="pp">*</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/genomes/human</span> /library/training/Intro_to_Linux/genomes/mouse</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> echo /library/training/Intro_to_Linux/genomes/mouse/mm<span class="pp">?</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/genomes/mouse/mm9</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> echo /library/training/Intro_to_Linux/genomes/mouse/mm<span class="pp">*</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/genomes/mouse/mm10</span> /library/training/Intro_to_Linux/genomes/mouse/mm9</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> tree /library/training/Intro_to_Linux/genomes</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/genomes</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> human</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── hg38</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── genome.fa</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> mouse</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> GRCm38</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> mm10</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│&nbsp;&nbsp;</span> ├── cpg_islands.bed</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│&nbsp;&nbsp;</span> ├── genes.bed</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│&nbsp;&nbsp;</span> ├── genome.fa</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│&nbsp;&nbsp;</span> └── repeats.bed</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> mm9</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│&nbsp;&nbsp;</span> └── genome.fa</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> UCSC</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This contains two sub-folders, human and mouse. Within each, there are further sub-folders for different genome versions. Some of these contain files with genome sequence and annotation data.</p>
+<p>A convenient way to experiment with glob patterns (and to make sure they match the files you want them to) is to use the <code>echo</code> command, which prints its arguments to the command line:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> echo /library/training/Intro_to_Linux/genomes/<span class="pp">*</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/genomes/human</span> /library/training/Intro_to_Linux/genomes/mouse</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> echo /library/training/Intro_to_Linux/genomes/mouse/mm<span class="pp">?</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/genomes/mouse/mm9</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> echo /library/training/Intro_to_Linux/genomes/mouse/mm<span class="pp">*</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/genomes/mouse/mm10</span> /library/training/Intro_to_Linux/genomes/mouse/mm9</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="challenge">
 <h2 class="anchored" data-anchor-id="glob-patterns">
@@ -333,7 +354,10 @@ Solution
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
 </h2>
-<p>One option would be /library/training/Intro_to_Linux/genomes/mouse/[GU]*</p>
+<p>One option would be find folders that start with G or U:<br>
+/library/training/Intro_to_Linux/genomes/mouse/[GU]*</p>
+<p>Another is to find folders that start with a capital letter by specifying the range A-Z:<br>
+/library/training/Intro_to_Linux/genomes/mouse/[A-Z]*</p>
 </div>
 </details>
 </div>
@@ -352,7 +376,8 @@ Solution
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
 </h2>
-<p>One option would be /library/training/Intro_to_Linux/genomes/mouse/<em>*[0-9]</em></p>
+<p>One option would be to match folders which contain a number anywhere in the name:<br>
+/library/training/Intro_to_Linux/genomes/mouse/<em>*[0-9]*</em></p>
 </div>
 </details>
 </div>
@@ -369,30 +394,33 @@ Solution
 </ul>
 <p>As well as its name and path, each file has a number of attributes associated with it, such as its size, when it was last modified, and the permissions associated with it. You can check the attributes associated with a file using the <code>stat</code> command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> stat /library/training/Intro_to_Linux/sequences.fa</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">File:</span> ‘sequences.fa’</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Size:</span> 135         Blocks: 1          IO Block: 8192   regular file</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Device:</span> 27h/39d Inode: 1003792241  Links: 1</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Access:</span> <span class="er">(</span><span class="ex">0644/-rw-r--r--</span><span class="kw">)</span>  <span class="ex">Uid:</span> <span class="er">(</span> <span class="ex">5000/bifxadmin</span><span class="kw">)</span>   <span class="ex">Gid:</span> <span class="er">(</span>  <span class="ex">505/bifxadmin</span><span class="kw">)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Access:</span> 2024-09-25 13:09:35.836470000 +0100</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Modify:</span> 2024-09-25 13:09:35.837141876 +0100</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Change:</span> 2024-09-25 13:10:28.019841000 +0100</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">Birth:</span> <span class="at">-</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> stat /library/training/Intro_to_Linux/sequences.fa</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">File:</span> ‘sequences.fa’</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Size:</span> 135         Blocks: 1          IO Block: 8192   regular file</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Device:</span> 27h/39d Inode: 1003792241  Links: 1</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Access:</span> <span class="er">(</span><span class="ex">0644/-rw-r--r--</span><span class="kw">)</span>  <span class="ex">Uid:</span> <span class="er">(</span> <span class="ex">500/user1</span><span class="kw">)</span>   <span class="ex">Gid:</span> <span class="er">(</span>  <span class="ex">50/group1</span><span class="kw">)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Access:</span> 2024-09-25 13:09:35.836470000 +0100</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Modify:</span> 2024-09-25 13:09:35.837141876 +0100</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Change:</span> 2024-09-25 13:10:28.019841000 +0100</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">Birth:</span> <span class="at">-</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The output of the <code>stat</code> command shows us:</p>
 <ul>
 <li>What type of file this is (a regular file)</li>
 <li>The size of the file (135 bytes)</li>
-<li>The identity and group of the owner of the file (bifxadmin)</li>
+<li>The identity and group of the owner of the file (user1 and group1)</li>
 <li>When the file was last accessed, modified, and changed</li>
-<li>The permissions on the file (-rw-r–r–)
+<li>The permissions on the file: Access: (0644/-rw-r–r–)
 <ul>
+<li>The permission string is -rw-r–r–</li>
 <li>The first character of the permission string tells us whether it is a file or directory</li>
 <li>The rest of the string can be divided into three groups (rw-, r–, and r–), representing the permissions granted to the user that owns the file, the group associated with the file, and all users</li>
+<li>Groups are sets of users. Permissions can be set by group to give multiple users access to the same files.</li>
 <li>There are three types of permission. These are permission to read the file (<code>r</code>), permission to write to the file (<code>w</code>), and permission to execute the file (<code>x</code>)</li>
 </ul></li>
 </ul>
+<p>File permissions can be altered with the <code>chmod</code> command. You can read more about setting permissions <a href="https://docs.oracle.com/cd/E19504-01/802-5750/6i9g464pv/index.html">here</a>.</p>
 <div class="challenge">
 <h2 class="anchored" data-anchor-id="file-types-and-attributes-in-linux">
 <i class="fas fa-pencil-alt"></i> Challenge:
@@ -421,37 +449,78 @@ Solution
 <i class="fas fa-thumbtack"></i> Key Points
 </h2>
 <ul>
-<li><code>cd</code> changes the current working directory</li>
+<li><code>cd</code> changes the current working directory
+<ul>
+<li>Use <code>cd path</code> to move to a specified directory e.g.&nbsp;<code>cd /library/training</code></li>
+<li>Use <code>cd ..</code> to move up a directory</li>
+<li>Use <code>cd</code> without an argument to return to your home directory</li>
+</ul></li>
+<li><code>dirs</code> lists a history of directories you have moved between</li>
 <li>The <code>ls</code> command lists the files in the current working directory</li>
+<li>The <code>tree</code> command provides a readable summary of the files in the current directory and its subdirectories</li>
 <li>The <code>find</code> command recursively searches for files in the current file system</li>
 </ul>
 </div>
 <p><br></p>
 <p>The following example demonstrates how we can navigate within the file system, and view and find files:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> cd /library/training/Intro_to_Linux/ </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> ls</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">analysis_improved.sh</span>   analysis_raw.sh   bioinformatics_on_the_command_line_files.tar.gz  <span class="st">'file name with spaces'</span>   genomes   sequences.fa</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> ls <span class="at">-lah</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 3.9M</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 4 bifxadmin bifxadmin  512 Sep 25 13:19 .</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 5 root      root       512 Sep 25 13:07 ..</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwxr-xr-x</span> 1 bifxadmin bifxadmin 3.2K Sep 25 13:07 analysis_improved.sh</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin 1.3K Sep 25 13:07 analysis_raw.sh</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin 3.9M Sep 25 13:07 bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin    0 Sep 25 13:07 file name with spaces</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 2 bifxadmin bifxadmin  512 Sep 25 13:19 genomes</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin  135 Sep 25 13:09 sequences.fa</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> ls <span class="at">-lah</span> <span class="pp">*</span>.gz</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin 3.9M Sep 25 13:07 bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> find genomes/mouse/mm10/ <span class="at">-type</span> f <span class="at">-name</span> <span class="st">'*.bed'</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ex">genomes/mouse/mm10/cpg_islands.bed</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ex">genomes/mouse/mm10/genes.bed</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ex">genomes/mouse/mm10/repeats.bed</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> cd</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> cd /library/training/Intro_to_Linux/ </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> ls</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">analysis_improved.sh</span>   analysis_raw.sh   bioinformatics_on_the_command_line_files.tar.gz  <span class="st">'file name with spaces'</span>   genomes   sequences.fa</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> ls <span class="at">-lah</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 3.9M</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 4 bifxadmin bifxadmin  512 Sep 25 13:19 .</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 5 root      root       512 Sep 25 13:07 ..</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwxr-xr-x</span> 1 bifxadmin bifxadmin 3.2K Sep 25 13:07 analysis_improved.sh</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin 1.3K Sep 25 13:07 analysis_raw.sh</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin 3.9M Sep 25 13:07 bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin    0 Sep 25 13:07 file name with spaces</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 2 bifxadmin bifxadmin  512 Sep 25 13:19 genomes</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin  135 Sep 25 13:09 sequences.fa</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> ls <span class="at">-lah</span> <span class="pp">*</span>.gz</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 bifxadmin bifxadmin 3.9M Sep 25 13:07 bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> find genomes/mouse/mm10/ <span class="at">-type</span> f <span class="at">-name</span> <span class="st">'*.bed'</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">genomes/mouse/mm10/cpg_islands.bed</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">genomes/mouse/mm10/genes.bed</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">genomes/mouse/mm10/repeats.bed</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> tree</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> analysis_improved.sh</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> analysis_raw.sh</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> file name with spaces</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> genomes</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── human</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp; └── hg38</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> │&nbsp;&nbsp;     └── genome.fa</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── mouse</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── GRCm38</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── mm10</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     │&nbsp;&nbsp; ├── cpg_islands.bed</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     │&nbsp;&nbsp; ├── genes.bed</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     │&nbsp;&nbsp; ├── genome.fa</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     │&nbsp;&nbsp; └── repeats.bed</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── mm9</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     │&nbsp;&nbsp; └── genome.fa</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── UCSC</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> sequences.fa</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="ex">9</span> directories, 15 files</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:/library/training/Intro_to_Linux/$</span> cd</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>Note:</em> In this example we have used the command <code>ls -lah</code>. This is an example of a shorthand that you can use in the bash shell when specifying multiple flags. <code>ls -lah</code> is equivalent to <code>ls -l -a -h</code>.</p>
+<ul>
+<li><p><code>-l</code> list files and show attributes</p></li>
+<li><p><code>-a</code> show all files (including hidden files)</p></li>
+<li><p><code>-h</code> show file size in human readable format</p></li>
+</ul>
+<p>Play around with the <code>ls</code> command to see how it behaves differently without these options.</p>
 <div class="challenge">
 <h2 class="anchored">
 <i class="fas fa-pencil-alt"></i> Challenge:
@@ -466,7 +535,9 @@ Solution
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
 </h2>
-<p>Run <code>find /library/training/Intro_to_Linux/genomes/mouse/ -type f -name 'genome.fa'</code></p>
+<p>Run <code>find /library/training/Intro_to_Linux/genomes -type f -name 'genome.fa'</code></p>
+<p>Or, because we know where they are in the tree:<br>
+ls <code>/library/training/Intro_to_Linux/genomes/*/*/genome.fa</code></p>
 </div>
 </details>
 </div>
@@ -485,8 +556,10 @@ Solution
 <h2 class="anchored">
 <i class="far fa-eye"></i> Solution:
 </h2>
-<p>Run <code>ls /library/training/Intro_to_Linux/genomes/</code> to list the organisms in that folder.</p>
+<p>Run <code>ls /library/training/Intro_to_Linux/genomes/*</code> to list the contents of each directory in the genomes folder.</p>
+<p>OR</p>
 <p>Run <code>find /library/training/Intro_to_Linux/genomes/ -maxdepth 2 -type d</code> to list the sub-directories of the directories representing the organisms, which represent genome releases.</p>
+<p>There is always more than one way to do things in Linux!</p>
 </div>
 </details>
 </div>
@@ -499,88 +572,101 @@ Solution
 <i class="fas fa-thumbtack"></i> Key Points
 </h2>
 <ul>
-<li>Files can be created using <code>touch</code>, by a text editor, or by redirecting the output of a program</li>
-<li>Symbolic links can be created using <code>ln -s</code></li>
-<li>Directories can be created using <code>mkdir</code>, and empty directories can be removed using <code>rmdir</code></li>
-<li>The <code>rm</code> command can be used to delete files, links, and directories along with their contents (using the <code>-r</code> flag)
+<li>Files can be created using:
 <ul>
-<li>There is no recycle bin in Linux, so <code>rm</code> should be used with care. The <code>-i</code> flag can be used to prompt for confirmation before deleting files</li>
+<li><code>touch</code>, a command to create an empty file</li>
+<li>A Unix text editor, like <code>emacs</code> or <code>vim</code></li>
+<li>By redirecting the output of a program into a new file (we will do this later)</li>
+</ul></li>
+<li>Symbolic links can be created using <code>ln -s</code>
+<ul>
+<li>A symbolic link is a shortcut to a file or directory that exists elsewhere</li>
+<li>On the bifx servers /home is a symbolic link to /datastore/home
+<ul>
+<li>Check this by running <code>ls -lh /home</code></li>
+</ul></li>
+</ul></li>
+<li>Directories can be created using <code>mkdir</code>, and empty directories can be removed using <code>rmdir</code></li>
+<li>The <code>rm</code> command can be used to delete files, links, and directories along with their contents (using the <code>-r</code> flag to recursively delete the contents of a directory)
+<ul>
+<li>There is no recycle bin in Linux, so <code>rm</code> should be used with care!</li>
+<li>The <code>-i</code> flag can be used to prompt for confirmation before deleting files</li>
 </ul></li>
 </ul>
 </div>
 <p><br></p>
 <p>The following example demonstrates how we can create and remove files, directories and links:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> cd</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> mkdir course</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> cd course</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> mkdir <span class="at">-p</span> dir1 dir2 dir3/dir4</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir2</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> dir3</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> dir4</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> directories, 0 files</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> touch file1</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir2</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir3</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── dir4</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> directories, 1 file</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd dir1</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ln <span class="at">-s</span> ../file1</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd ..</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── file1 <span class="at">-</span><span class="op">&gt;</span> ../file1</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir2</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir3</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── dir4</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> directories, 2 files</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rmdir <span class="pp">*</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="ex">rmdir:</span> failed to remove <span class="st">'dir1'</span>: Directory not empty</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="ex">rmdir:</span> failed to remove <span class="st">'dir3'</span>: Directory not empty</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="ex">rmdir:</span> failed to remove <span class="st">'file1'</span>: Not a directory</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── file1 <span class="at">-</span><span class="op">&gt;</span> ../file1</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir3</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── dir4</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> directories, 2 files</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm <span class="at">-ri</span> <span class="pp">*</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> descend into directory <span class="st">'dir1'</span><span class="pp">?</span> y</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove symbolic link <span class="st">'dir1/file1'</span><span class="pp">?</span> y</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'dir1'</span><span class="pp">?</span> n</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> descend into directory <span class="st">'dir3'</span><span class="pp">?</span> y</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'dir3/dir4'</span><span class="pp">?</span> y</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'dir3'</span><span class="pp">?</span> y</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular empty file <span class="st">'file1'</span><span class="pp">?</span> n</span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 1 file</span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rmdir dir1</span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm <span class="at">-i</span> file1</span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular empty file <span class="st">'file1'</span><span class="pp">?</span> y</span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> directories, 0 files</span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> cd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> mkdir course</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~$</span> cd course</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> mkdir <span class="at">-p</span> dir1 dir2 dir3/dir4</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir2</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> dir3</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> dir4</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> directories, 0 files</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> touch file1</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir2</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir3</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── dir4</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> directories, 1 file</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd dir1</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ln <span class="at">-s</span> ../file1</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd ..</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── file1 <span class="at">-</span><span class="op">&gt;</span> ../file1</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir2</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir3</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── dir4</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ex">4</span> directories, 2 files</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rmdir <span class="pp">*</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="ex">rmdir:</span> failed to remove <span class="st">'dir1'</span>: Directory not empty</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="ex">rmdir:</span> failed to remove <span class="st">'dir3'</span>: Directory not empty</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="ex">rmdir:</span> failed to remove <span class="st">'file1'</span>: Not a directory</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── file1 <span class="at">-</span><span class="op">&gt;</span> ../file1</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir3</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── dir4</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> directories, 2 files</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm <span class="at">-ri</span> <span class="pp">*</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> descend into directory <span class="st">'dir1'</span><span class="pp">?</span> y</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove symbolic link <span class="st">'dir1/file1'</span><span class="pp">?</span> y</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'dir1'</span><span class="pp">?</span> n</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> descend into directory <span class="st">'dir3'</span><span class="pp">?</span> y</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'dir3/dir4'</span><span class="pp">?</span> y</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'dir3'</span><span class="pp">?</span> y</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular empty file <span class="st">'file1'</span><span class="pp">?</span> n</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dir1</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> file1</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 1 file</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rmdir dir1</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm <span class="at">-i</span> file1</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular empty file <span class="st">'file1'</span><span class="pp">?</span> y</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> directories, 0 files</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The example demonstrates a number of commands:</p>
 <ul>
@@ -590,7 +676,7 @@ Solution
 </ul></li>
 <li><code>mkdir</code> to create empty directories
 <ul>
-<li>Add -p to create nested directories by specifying paths</li>
+<li>Add -p when create nested directories that don’t exist yet e.g.&nbsp;dir3/dir4</li>
 </ul></li>
 <li><code>ln -s</code> to create a symbolic link to a file or directory</li>
 <li><code>rmdir</code> to delete empty directories, without deleting files or non-empty directories</li>
@@ -625,80 +711,74 @@ Solution
 <p><br></p>
 <p>The following example demonstrates how we can copy files and directories, extract archive files and update file permissions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cp /library/training/Intro_to_Linux/bioinformatics_on_the_command_line_files.tar.gz .</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tar <span class="at">-xzvf</span> bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/yeast_genome.fasta</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/README</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/yeast_genes.bed</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 5 files</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cp <span class="at">-r</span> bioinformatics_on_the_command_line_files bioinformatics_on_the_command_line_files-copy</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files-copy</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README.txt</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> directories, 9 files</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> mv bioinformatics_on_the_command_line_files-copy/README README.txt</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files-copy</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> README.txt</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> directories, 9 files</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm <span class="at">-r</span> <span class="at">-i</span> bioinformatics_on_the_command_line_files-copy README.txt</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> descend into directory <span class="st">'bioinformatics_on_the_command_line_files-copy/'</span><span class="pp">?</span> y</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/s.cerevisiae_genome.fasta'</span><span class="pp">?</span> y</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/raw_s.cerevisiae_rnaseq_data.fastq'</span><span class="pp">?</span> y</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/README'</span><span class="pp">?</span> y</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/s.cerevisiae_genes.bed'</span><span class="pp">?</span> y</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'bioinformatics_on_the_command_line_files-copy/'</span><span class="pp">?</span> y</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'README.txt'</span><span class="pp">?</span> y</span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 5 files</span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> chmod a-w bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ls <span class="at">-lah</span> bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove write-protected regular file <span class="st">'bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq'</span><span class="pp">?</span> n</span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cp /library/training/Intro_to_Linux/bioinformatics_on_the_command_line_files.tar.gz .</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tar <span class="at">-xzvf</span> bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/yeast_genome.fasta</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/README</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files/yeast_genes.bed</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 5 files</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cp <span class="at">-r</span> bioinformatics_on_the_command_line_files bioinformatics_on_the_command_line_files-copy</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files-copy</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README.txt</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> directories, 9 files</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> mv bioinformatics_on_the_command_line_files-copy/README README.txt</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files-copy</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> README.txt</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> directories, 9 files</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm <span class="at">-r</span> <span class="at">-i</span> bioinformatics_on_the_command_line_files-copy README.txt</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> descend into directory <span class="st">'bioinformatics_on_the_command_line_files-copy/'</span><span class="pp">?</span> y</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/s.cerevisiae_genome.fasta'</span><span class="pp">?</span> y</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/raw_s.cerevisiae_rnaseq_data.fastq'</span><span class="pp">?</span> y</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/README'</span><span class="pp">?</span> y</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'bioinformatics_on_the_command_line_files-copy/s.cerevisiae_genes.bed'</span><span class="pp">?</span> y</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove directory <span class="st">'bioinformatics_on_the_command_line_files-copy/'</span><span class="pp">?</span> y</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove regular file <span class="st">'README.txt'</span><span class="pp">?</span> y</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> tree</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> bioinformatics_on_the_command_line_files</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.fastq</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── README</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── yeast_genes.bed</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> bioinformatics_on_the_command_line_files.tar.gz</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 5 files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This example has demonstrated a number of commands:</p>
 <ul>
@@ -706,14 +786,31 @@ Solution
 <ul>
 <li>The <code>-a</code> flag will preserve file attributes when they are copied</li>
 </ul></li>
-<li><code>mv</code> to move files or directories</li>
-<li><code>chmod</code> to change the permissions on a file
+<li><code>mv</code> to move files or directories
 <ul>
-<li>It’s always a good idea to make raw data files read only as we did in the example, as it makes it more difficult to remove or overwrite them accidentally</li>
-<li>the <code>a-w</code> argument removes <code>w</code>rite access for <code>a</code>ll users.</li>
-<li>Check the <code>chmod</code> man page for more details on how to change file permissions. For now it is fine to just know this is possible.</li>
+<li>The second argument to <code>mv</code> is the destination. This can be:
+<ul>
+<li>A file path to rename the file e.g.&nbsp;<code>mv file1.txt ../dir1/file2.txt</code></li>
+<li>A directory path to move the file and keep the original name e.g.&nbsp;<code>mv file1.txt ../dir1/</code></li>
+</ul></li>
 </ul></li>
 </ul>
+<p>File permissions can be altered using the <code>chmod</code> command.</p>
+<ul>
+<li>It’s always a good idea to make raw data files read only as it makes it more difficult to remove or overwrite them accidentally</li>
+<li>the <code>a-w</code> argument removes <code>w</code>rite access for <code>a</code>ll users</li>
+<li>Check the <code>chmod</code> man page for more details on how to change file permissions. For now it is fine to just know this is possible.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ls <span class="at">-lah</span> bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 <span class="pp">[</span><span class="ss">USERNAME</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">USERNAME</span><span class="pp">]</span> 1.5M Nov 12  2020 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> chmod a-w bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ls <span class="at">-lah</span> bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">-r--r--r--</span> 1 <span class="pp">[</span><span class="ss">USERNAME</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">USERNAME</span><span class="pp">]</span> 1.5M Nov 12  2020 bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> rm bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">rm:</span> remove write-protected regular file <span class="st">'bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq'</span><span class="pp">?</span> n</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>

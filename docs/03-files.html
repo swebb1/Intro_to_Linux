@@ -217,7 +217,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Regular files in Linux can be classified as text files, which contain human readable text, and binary files, that contain data that is not human readable</li>
 <li>The <code>cat</code> command can be used to show the contents of a file
 <ul>
-<li>The <code>less</code> command allows you to page through a large file</li>
+<li>The <code>less</code> command allows you to page through a large file
+<ul>
+<li>Hit <code>q</code> to exit the <code>less</code> command</li>
+</ul></li>
 </ul></li>
 <li>The <code>head</code> and <code>tail</code> commands can be used to show the first or last few lines of a file
 <ul>
@@ -296,7 +299,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>.*</code> represents a sequence of zero or more characters</li>
 <li><code>.+</code> represents a sequence of one or more characters</li>
 </ul>
-<p>Compressed files can be unzipped with the <code>gzip</code> command:</p>
+<p>Files can be zipped (compressed) and unzipped (decompressed) with the <code>gzip</code> command:</p>
+<ul>
+<li><p><code>gzip -k</code> will compress a file and keep the original uncompressed version</p></li>
+<li><p><code>gzip -d</code> will decompress a gzip’d file</p></li>
+<li><p><code>zless</code>, <code>zcat</code> and <code>zgrep</code> work on compressed files</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> gzip <span class="at">-k</span> bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
