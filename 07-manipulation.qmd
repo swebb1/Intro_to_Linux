@@ -1,0 +1,199 @@
+---
+title: "Text Manipulation"
+format:
+  html:
+    link-external-newwindow: true
+---
+
+<head>
+
+```{=html}
+<script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
+```
+</head>
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+------------------------------------------------------------------------
+
+In this section we are going to use some common Unix tools to manipulate a genomic annotation file `GRCm39_ensembl_v110.txt`.
+
+### Useful Unix tools
+
+------------------------------------------------------------------------
+
+::: key-points
+<h2><i class="fas fa-thumbtack"></i> Key Points</h2>
+
+-   `cut` to cut specific columns or characters from a file
+-   `grep` for pattern searching and filtering
+-   `sed` for text stream manipulation
+-   `sort` to sort files
+-   `uniq` to find unique entries
+-   `awk` and `perl` for programming one-liners
+-   `paste` and `cat` can be used to join files in different ways
+-   `head`, `tail` and `less` are good for quick inspection
+-   `wc` to count words or lines in a file
+:::
+
+<br>
+
+The file `GRCm39_ensembl_v110.txt`has been downloaded from the [Ensembl](https://www.ensembl.org/index.html) database and contains gene annotations for the GRCm39 mouse genome assembly.
+
+Ensembl files do not always play well with other genomic data as they use a different format. For instance, they do not use "chr" in the chromosome names and they use 1/-1 to denote strand instead of +/-.
+
+We would like to reformat this file to make it compatible with other genomic datasets:
+
+-   Add "chr" to the chromosome column
+
+-   Reformat the strand column to contain +/-
+
+-   Change the mitochondrial contig name from MT to M
+
+-   Select only protein coding genes
+
+-   Output a UCSC style [BED file](https://en.wikipedia.org/wiki/BED_(file_format)), a standard genomic annotation format with six columns
+
+We can start by inspecting the file with the `head` command and see how many lines it contains with `wc`:
+
+```{bash eval=F}
+## Copy the file to your course directory (~ is a shortcut to your home directory)
+cp /library/training/test_files/GRCm39_ensembl_v110.txt ~/course
+
+## Inspect the file
+wc -l GRCm39_ensembl_v110.txt
+head GRCm39_ensembl_v110.txt 
+```
+
+The file contains 57187 lines and has the following columns: Chromosome/scaffold name, Gene start (bp), Gene end (bp), Strand, Gene name, Gene type.
+
+Let's see which chromosomes are listed in the file. We can use `cut` to cut a specified column `-f` from our file. We then pipe the output into `uniq` to get unique values only.
+
+```{bash eval =F}
+## The cut command cuts 
+cut -f 1 GRCm39_ensembl_v110.txt | uniq
+```
+
+That didn't look right... `uniq` expects sorted input. We can use `sort` to sort the output before piping it into `uniq` or use the `-u` flag with `sort` to get unique values only.
+
+```{bash eval =F}
+cut -f 1 GRCm39_ensembl_v110.txt | sort | uniq
+cut -f 1 GRCm39_ensembl_v110.txt | sort -u
+```
+
+We have lots of random contigs. Let's see how many of these there are. We'll get rid of them later and just look at the primary assembly. We can use `grep` to search for lines that start with "GL" or "JH" and then invert the match with `-v` to exclude these lines.
+
+```{bash eval =F}
+## Lines that start with GL
+grep "^GL" GRCm39_ensembl_v110.txt | wc -l
+## Lines that start with GL or JH
+grep "^[GL,JH]" GRCm39_ensembl_v110.txt | wc -l
+## Lines that do not start with GL or JH
+grep -v "^[GL,JH]" GRCm39_ensembl_v110.txt | wc -l
+```
+
+While we're at it, here are some other examples of `grep` commands:
+
+```{bash eval =F}
+## Find the gene ENSMUSG00000064342
+grep ENSMUSG00000064342 GRCm39_ensembl_v110.txt
+# Grep is case sensitive by default, so the next command won't find the gene
+grep ensmusg00000064342 GRCm39_ensembl_v110.txt
+# Use the -i flag to make the search case insensitive
+grep -i ensmusg00000064342 GRCm39_ensembl_v110.txt
+
+## Print the lines after the match
+grep -A 2 ENSMUSG00000064342 GRCm39_ensembl_v110.txt
+## Print the lines before the match
+grep -B 2 ENSMUSG00000064342 GRCm39_ensembl_v110.txt
+## Print the lines before and after the match
+grep -C 2 ENSMUSG00000064342 GRCm39_ensembl_v110.txt
+
+## Do we have RNA genes in the file?
+grep "RNA$" GRCm39_ensembl_v110.txt | head
+## Okay, what types of RNA genes are there?
+grep "RNA$" GRCm39_ensembl_v110.txt | cut -f 6 | sort -u
+
+## Let's find the total number of genes on chromosome 1. We need to find lines that start with "1" followed by the tab character. Otherwise, we will get lines starting with 10, 11, 12 etc. The tab character is represented by \t and we need to use the -P flag to enable grep to recognise this (Perl compatible regular expressions).
+grep -P '^1\t' GRCm39_ensembl_v110.txt | wc -l
+
+## We can use other regular expressions to pattern match specific gene names
+grep -P 'ENSMUSG[0]+[1-3]' GRCm39_ensembl_v110.txt | head
+grep -P 'ENSMUSG[0]{4}[1-3]' GRCm39_ensembl_v110.txt | head 
+```
+
+Now that we've played with the file for a bit, let's start manipulating it to get protein coding genes in the UCSC BED format. We can use `grep` to search for lines that contain "protein_coding" and then invert the match with `-v` to exclude these lines.
+
+```{bash eval =F}
+## Start manipulating our file
+## Protein coding genes in ucsc bed format
+
+## grep -e '^Chr' will keep the header line, we will hang onto this for now
+## grep -e 'protein_coding' will keep lines that contain 'protein_coding'
+## grep -v '^[GH,JH]' will exclude lines that start with 'GH' or 'JH' and remove random contigs
+## We will redirect the output to a new file called GRCm39_ensembl_v110.pc.txt 
+grep -e '^Chr' -e 'protein_coding' GRCm39_ensembl_v110.txt | grep -v '^[GH,JH]' > GRCm39_ensembl_v110.pc.txt 
+```
+
+The `sed` command is a stream editor that can perform basic text transformations on an input stream. It has many uses including removing lines and performing text substitutions.
+
+```{bash eval =F}
+## sed 1d will delete the first line, removing our header
+sed 1d GRCm39_ensembl_v110.pc.txt | head
+## sed 1,3d can delete the first three lines
+sed 1,3d GRCm39_ensembl_v110.pc.txt | head
+
+## sed -e 's/^MT/M/g' will substitute 'MT' with 'M' when found at the start of the line. Ensembl uses 'MT' to denote the mitochondrial chromosome, but UCSC use 'chrM'.
+sed -e 's/^MT/M/g' -e '1d' GRCm39_ensembl_v110.pc.txt | head
+
+## sed has a handy -i flag that allows us to edit the file in place rather than redirecting the output to a new file. Be careful with this as it will overwrite the original file. We can perform both steps by supplying multiple -e flags.
+sed -i -e 's/^MT/M/g' -e '1d' GRCm39_ensembl_v110.pc.txt
+```
+
+We can rerun everything we have done so far in a single command using pipes. We are also going to drop the sixth column as we don't need the "Gene type" once we have selected protein coding genes and it is not a required column for BED format.
+
+```{bash eval =F}
+grep -e '^Chr' -e 'protein_coding' GRCm39_ensembl_v110.txt | grep -v '^[GH,JH]' | cut -f 1-5 | sed -e 's/^MT/M/g' -e '1d' > GRCm39_ensembl_v110.pc.txt
+```
+
+We now need to reformat the strand column to contain +/-. We can use `awk` to do this. Awk is a powerful programming language that is particularly well suited to text processing and text manipulation. Awk is convenient on the command line as it can be run in one line of code.
+
+We will also add "chr" to the chromosome column and reorder the columns to match the standard BED format.
+
+```{bash eval =F}
+## OFS is the output field separator, we set this to a tab character
+## We use an if statement to check if the strand column is 1 or -1 and print the appropriate strand symbol
+## We then print the letters "chr" followed by column 1 ($1)
+## We then print columns 2, 3, 5 and a 0 for the BED score column
+## Finally, we redirect the output to a new file called GRCm39_ensembl_v110.pc.edit.bed
+
+awk '{ OFS="\t" }{ if($4==1){ print "chr"$1,$2,$3,$5,0,"+" }else{ print "chr"$1,$2,$3,$5,0,"-" }}' GRCm39_ensembl_v110.pc.txt > GRCm39_ensembl_v110.pc.edit.bed
+
+## We can get the same result using Perl, an alternative to awk
+perl -lane 'if($F[3]==1){$s="+";}else{$s="-";}; print "chr$F[0]\t$F[1]\t$F[2]\t$F[4]\t0\t$s";' GRCm39_ensembl_v110.pc.txt > GRCm39_ensembl_v110.pc.pl.bed
+```
+
+Finally, we can sort the file.
+
+```{bash eval =F}
+## Sort -k
+head GRCm39_ensembl_v110.pc.edit.bed
+sort GRCm39_ensembl_v110.pc.edit.bed | head
+
+## This is not what we want, take a look at the sort manual
+man sort
+```
+
+To sort the file by chromosome and then by start position we can use the `-k` flag to set sorting keys. The first k, k1 uses column 1 with the `-V` flag. This is a "version" sort which is alphanumeric and will put chr1 first. The second key, k2, uses column 2 with `-n` flag. This is a numerical sort and will place lower start positions first.
+
+```{bash eval =F}
+sort -k1,1V -k2,2n GRCm39_ensembl_v110.pc.edit.bed > GRCm39_ensembl_v110.pc.edit.sorted.bed
+
+head GRCm39_ensembl_v110.pc.edit.sorted.bed
+
+## Success!!!
+```
+
+### 

@@ -150,6 +150,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Processes</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./07-manipulation.html"> 
+<span class="menu-text">Text Manipulation</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./05-analysis.html"> 
 <span class="menu-text">Analysis</span></a>
   </li>  
@@ -439,7 +443,7 @@ Solution
 </h2>
 <p>In the example below we measure the time it takes to find the first line that contains the character ‘A’ in a large genome file. We first write all of the matches to a temporary file and then find the first line using <code>head</code> as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> time grep A /homes/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa <span class="op">&gt;</span> grepA.tmp</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> time grep A /datastore/home/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa <span class="op">&gt;</span> grepA.tmp</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">real</span>    0m36.182s</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">user</span>    0m7.831s</span>
@@ -456,7 +460,7 @@ Solution
 </div>
 <p>We can see that the operation takes just over 36 seconds. In the example below, we pipe the output of the grep command into the head command.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> time grep A /home/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> time grep A /datastore/home/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gcttcagaataatcatattattctcaaattttgtatcaatataaaaaaaA</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">real</span>    0m0.011s</span>

@@ -258,7 +258,7 @@ Pipes are particularly useful for working with large files, as they remove the n
 In the example below we measure the time it takes to find the first line that contains the character 'A' in a large genome file. We first write all of the matches to a temporary file and then find the first line using `head` as follows:
 
 ```{bash eval=F}
-[USERNAME]@bifx-core1:~/course$ time grep A /homes/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa > grepA.tmp
+[USERNAME]@bifx-core1:~/course$ time grep A /datastore/home/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa > grepA.tmp
 
 real	0m36.182s
 user	0m7.831s
@@ -277,7 +277,7 @@ rm: remove regular file 'grepA.tmp'? y
 We can see that the operation takes just over 36 seconds. In the example below, we pipe the output of the grep command into the head command.
 
 ```{bash eval=F}
-[USERNAME]@bifx-core1:~/course$ time grep A /home/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa | head -1
+[USERNAME]@bifx-core1:~/course$ time grep A /datastore/home/genomes/mouse/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa | head -1
 gcttcagaataatcatattattctcaaattttgtatcaatataaaaaaaA
 
 real	0m0.011s
