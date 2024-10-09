@@ -178,7 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#useful-unix-tools" id="toc-useful-unix-tools" class="nav-link active" data-scroll-target="#useful-unix-tools">Useful Unix tools</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#inspecting-a-file" id="toc-inspecting-a-file" class="nav-link" data-scroll-target="#inspecting-a-file">Inspecting a file</a></li>
+  <li><a href="#cut-sort-and-uniq" id="toc-cut-sort-and-uniq" class="nav-link" data-scroll-target="#cut-sort-and-uniq">Cut, sort and uniq</a></li>
+  <li><a href="#playing-with-grep" id="toc-playing-with-grep" class="nav-link" data-scroll-target="#playing-with-grep">Playing with grep</a></li>
+  <li><a href="#sed-for-stream-editing" id="toc-sed-for-stream-editing" class="nav-link" data-scroll-target="#sed-for-stream-editing">Sed for stream editing</a></li>
+  <li><a href="#awk-and-perl-for-command-line-programming" id="toc-awk-and-perl-for-command-line-programming" class="nav-link" data-scroll-target="#awk-and-perl-for-command-line-programming">Awk and Perl for command line programming</a></li>
+  <li><a href="#sort-using-keys" id="toc-sort-using-keys" class="nav-link" data-scroll-target="#sort-using-keys">Sort using keys</a></li>
   </ul>
 </nav>
     </div>
@@ -239,6 +244,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Select only protein coding genes</p></li>
 <li><p>Output a UCSC style <a href="https://en.wikipedia.org/wiki/BED_(file_format)">BED file</a>, a standard genomic annotation format with six columns</p></li>
 </ul>
+</section>
+<section id="inspecting-a-file" class="level3">
+<h3 class="anchored" data-anchor-id="inspecting-a-file">Inspecting a file</h3>
+<hr>
 <p>We can start by inspecting the file with the <code>head</code> command and see how many lines it contains with <code>wc</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Copy the file to your course directory (~ is a shortcut to your home directory)</span></span>
@@ -249,6 +258,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> GRCm39_ensembl_v110.txt </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The file contains 57187 lines and has the following columns: Chromosome/scaffold name, Gene start (bp), Gene end (bp), Strand, Gene name, Gene type.</p>
+</section>
+<section id="cut-sort-and-uniq" class="level3">
+<h3 class="anchored" data-anchor-id="cut-sort-and-uniq">Cut, sort and uniq</h3>
+<hr>
 <p>Let’s see which chromosomes are listed in the file. We can use <code>cut</code> to cut a specified column <code>-f</code> from our file. We then pipe the output into <code>uniq</code> to get unique values only.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">## The cut command cuts </span></span>
@@ -259,6 +272,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 1 GRCm39_ensembl_v110.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 1 GRCm39_ensembl_v110.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="playing-with-grep" class="level3">
+<h3 class="anchored" data-anchor-id="playing-with-grep">Playing with grep</h3>
+<hr>
 <p>We have lots of random contigs. Let’s see how many of these there are. We’ll get rid of them later and just look at the primary assembly. We can use <code>grep</code> to search for lines that start with “GL” or “JH” and then invert the match with <code>-v</code> to exclude these lines.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Lines that start with GL</span></span>
@@ -307,6 +324,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">## We will redirect the output to a new file called GRCm39_ensembl_v110.pc.txt </span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-e</span> <span class="st">'^Chr'</span> <span class="at">-e</span> <span class="st">'protein_coding'</span> GRCm39_ensembl_v110.txt <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^[GH,JH]'</span> <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.txt </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="sed-for-stream-editing" class="level3">
+<h3 class="anchored" data-anchor-id="sed-for-stream-editing">Sed for stream editing</h3>
+<hr>
 <p>The <code>sed</code> command is a stream editor that can perform basic text transformations on an input stream. It has many uses including removing lines and performing text substitutions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">## sed 1d will delete the first line, removing our header</span></span>
@@ -324,6 +345,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-e</span> <span class="st">'^Chr'</span> <span class="at">-e</span> <span class="st">'protein_coding'</span> GRCm39_ensembl_v110.txt <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^[GH,JH]'</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1-5 <span class="kw">|</span> <span class="fu">sed</span> <span class="at">-e</span> <span class="st">'s/^MT/M/g'</span> <span class="at">-e</span> <span class="st">'1d'</span> <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="awk-and-perl-for-command-line-programming" class="level3">
+<h3 class="anchored" data-anchor-id="awk-and-perl-for-command-line-programming">Awk and Perl for command line programming</h3>
+<hr>
 <p>We now need to reformat the strand column to contain +/-. We can use <code>awk</code> to do this. Awk is a powerful programming language that is particularly well suited to text processing and text manipulation. Awk is convenient on the command line as it can be run in one line of code.</p>
 <p>We will also add “chr” to the chromosome column and reorder the columns to match the standard BED format.</p>
 <div class="cell">
@@ -347,6 +372,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">## This is not what we want, take a look at the sort manual</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> sort</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="sort-using-keys" class="level3">
+<h3 class="anchored" data-anchor-id="sort-using-keys">Sort using keys</h3>
+<hr>
 <p>To sort the file by chromosome and then by start position we can use the <code>-k</code> flag to set sorting keys. The first k, k1 uses column 1 with the <code>-V</code> flag. This is a “version” sort which is alphanumeric and will put chr1 first. The second key, k2, uses column 2 with <code>-n</code> flag. This is a numerical sort and will place lower start positions first.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-k1,1V</span> <span class="at">-k2,2n</span> GRCm39_ensembl_v110.pc.edit.bed <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.edit.sorted.bed</span>
@@ -355,9 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">## Success!!!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
+<p>Note: Sort also has a <code>-r</code> flag for reverse or decreasing order.</p>
 
 
 </section>

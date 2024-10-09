@@ -56,6 +56,10 @@ We would like to reformat this file to make it compatible with other genomic dat
 
 -   Output a UCSC style [BED file](https://en.wikipedia.org/wiki/BED_(file_format)), a standard genomic annotation format with six columns
 
+### Inspecting a file
+
+------------------------------------------------------------------------
+
 We can start by inspecting the file with the `head` command and see how many lines it contains with `wc`:
 
 ```{bash eval=F}
@@ -68,6 +72,10 @@ head GRCm39_ensembl_v110.txt
 ```
 
 The file contains 57187 lines and has the following columns: Chromosome/scaffold name, Gene start (bp), Gene end (bp), Strand, Gene name, Gene type.
+
+### Cut, sort and uniq
+
+------------------------------------------------------------------------
 
 Let's see which chromosomes are listed in the file. We can use `cut` to cut a specified column `-f` from our file. We then pipe the output into `uniq` to get unique values only.
 
@@ -82,6 +90,10 @@ That didn't look right... `uniq` expects sorted input. We can use `sort` to sort
 cut -f 1 GRCm39_ensembl_v110.txt | sort | uniq
 cut -f 1 GRCm39_ensembl_v110.txt | sort -u
 ```
+
+### Playing with grep
+
+------------------------------------------------------------------------
 
 We have lots of random contigs. Let's see how many of these there are. We'll get rid of them later and just look at the primary assembly. We can use `grep` to search for lines that start with "GL" or "JH" and then invert the match with `-v` to exclude these lines.
 
@@ -137,6 +149,10 @@ Now that we've played with the file for a bit, let's start manipulating it to ge
 grep -e '^Chr' -e 'protein_coding' GRCm39_ensembl_v110.txt | grep -v '^[GH,JH]' > GRCm39_ensembl_v110.pc.txt 
 ```
 
+### Sed for stream editing
+
+------------------------------------------------------------------------
+
 The `sed` command is a stream editor that can perform basic text transformations on an input stream. It has many uses including removing lines and performing text substitutions.
 
 ```{bash eval =F}
@@ -157,6 +173,10 @@ We can rerun everything we have done so far in a single command using pipes. We 
 ```{bash eval =F}
 grep -e '^Chr' -e 'protein_coding' GRCm39_ensembl_v110.txt | grep -v '^[GH,JH]' | cut -f 1-5 | sed -e 's/^MT/M/g' -e '1d' > GRCm39_ensembl_v110.pc.txt
 ```
+
+### Awk and Perl for command line programming
+
+------------------------------------------------------------------------
 
 We now need to reformat the strand column to contain +/-. We can use `awk` to do this. Awk is a powerful programming language that is particularly well suited to text processing and text manipulation. Awk is convenient on the command line as it can be run in one line of code.
 
@@ -186,6 +206,10 @@ sort GRCm39_ensembl_v110.pc.edit.bed | head
 man sort
 ```
 
+### Sort using keys
+
+------------------------------------------------------------------------
+
 To sort the file by chromosome and then by start position we can use the `-k` flag to set sorting keys. The first k, k1 uses column 1 with the `-V` flag. This is a "version" sort which is alphanumeric and will put chr1 first. The second key, k2, uses column 2 with `-n` flag. This is a numerical sort and will place lower start positions first.
 
 ```{bash eval =F}
@@ -196,4 +220,4 @@ head GRCm39_ensembl_v110.pc.edit.sorted.bed
 ## Success!!!
 ```
 
-### 
+Note: Sort also has a `-r` flag for reverse or decreasing order.
