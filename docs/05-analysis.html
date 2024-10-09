@@ -150,16 +150,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Processes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./07-manipulation.html"> 
-<span class="menu-text">Text Manipulation</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="./05-analysis.html" aria-current="page"> 
 <span class="menu-text">Analysis</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06-scripts.html"> 
 <span class="menu-text">Scripts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./07-manipulation.html"> 
+<span class="menu-text">Exercise</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -292,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cd bioinformatics_on_the_command_line_files</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> cut <span class="at">-f1</span> yeast_genes.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="op">&gt;</span> yeast_genes_bed_chromosomes.list </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> grep <span class="at">-E</span> <span class="st">'^&gt;'</span> yeast_genome.fasta <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c2-</span> <span class="op">&gt;</span> yeast_genome_fasta_chromosomes.list</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> grep <span class="st">'^&gt;'</span> yeast_genome.fasta <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c2-</span> <span class="op">&gt;</span> yeast_genome_fasta_chromosomes.list</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> wc <span class="at">-l</span> <span class="pp">*</span>_chromosomes.list</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">17</span> yeast_genes_bed_chromosomes.list</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="ex">17</span> yeast_genome_fasta_chromosomes.list</span>
@@ -338,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We can see that there is a mismatch between the chromosome names in the BED and FASTA files. Each chromosome name in the BED file is equivalent to the corresponding name in the FASTA file with ‘chr’ added to the start.</p>
 <p>Before using these files in a bioinformatics analysis, we need to update one of them so that the names match. In the following example we fix the BED file by removing ‘chr’ from the start of each line.</p>
-<p>The example below uses the <code>sed</code> command, which is used to perform a search and replace style substitution on each line in the BED file using a regular expression. Here, as in the previous examples using <code>grep -E</code>, the ‘^’ character is a regular expression character representing the start of the line. We then confirm that the chromosomes are now the same using the <code>diff</code> command. This produces no output, which means that there are no differences between the chromosome lists.</p>
+<p>The example below uses the <code>sed</code> command, which is used to perform a search and replace style substitution on each line in the BED file using a regular expression. Here, as in the previous examples using <code>grep</code>, the ‘^’ character is a regular expression character representing the start of the line. We then confirm that the chromosomes are now the same using the <code>diff</code> command. This produces no output, which means that there are no differences between the chromosome lists.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> sed <span class="st">'s/^chr//'</span> yeast_genes.bed <span class="op">&gt;</span> yeast_genes.fixed.bed</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$</span> cut <span class="at">-f1</span> yeast_genes.fixed.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="op">&gt;</span> yeast_genes_fixed_bed_chromosomes.list</span>

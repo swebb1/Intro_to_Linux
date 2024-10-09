@@ -150,16 +150,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Processes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./07-manipulation.html" aria-current="page"> 
-<span class="menu-text">Text Manipulation</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./05-analysis.html"> 
 <span class="menu-text">Analysis</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06-scripts.html"> 
 <span class="menu-text">Scripts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./07-manipulation.html" aria-current="page"> 
+<span class="menu-text">Exercise</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
 
 <hr>
-<p>In this section we are going to use some common Unix tools to manipulate a genomic annotation file <code>GRCm39_ensembl_v110.txt</code>.</p>
+<p>In this section we are going to use common Unix tools to reformat a file containing genomic annotations (<code>GRCm39_ensembl_v110.txt</code>).</p>
 <section id="useful-unix-tools" class="level3">
 <h3 class="anchored">Useful Unix tools</h3>
 <hr>
@@ -242,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Reformat the strand column to contain +/-</p></li>
 <li><p>Change the mitochondrial contig name from MT to M</p></li>
 <li><p>Select only protein coding genes</p></li>
-<li><p>Output a UCSC style <a href="https://en.wikipedia.org/wiki/BED_(file_format)">BED file</a>, a standard genomic annotation format with six columns</p></li>
+<li><p>Output a UCSC style <a href="https://en.wikipedia.org/wiki/BED_(file_format)">BED file</a>, a standard genomic annotation format with six columns (chromosome, start, end, name, score, strand).</p></li>
 </ul>
 </section>
 <section id="inspecting-a-file" class="level3">
@@ -352,16 +352,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We now need to reformat the strand column to contain +/-. We can use <code>awk</code> to do this. Awk is a powerful programming language that is particularly well suited to text processing and text manipulation. Awk is convenient on the command line as it can be run in one line of code.</p>
 <p>We will also add “chr” to the chromosome column and reorder the columns to match the standard BED format.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">## OFS is the output field separator, we set this to a tab character</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">## We use an if statement to check if the strand column is 1 or -1 and print the appropriate strand symbol</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">## We then print the letters "chr" followed by column 1 ($1)</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">## We then print columns 2, 3, 5 and a 0 for the BED score column</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">## Finally, we redirect the output to a new file called GRCm39_ensembl_v110.pc.edit.bed</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{ OFS="\t" }{ if($4==1){ print "chr"$1,$2,$3,$5,0,"+" }else{ print "chr"$1,$2,$3,$5,0,"-" }}'</span> GRCm39_ensembl_v110.pc.txt <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.edit.bed</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">## We can get the same result using Perl, an alternative to awk</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">perl</span> <span class="at">-lane</span> <span class="st">'if($F[3]==1){$s="+";}else{$s="-";}; print "chr$F[0]\t$F[1]\t$F[2]\t$F[4]\t0\t$s";'</span> GRCm39_ensembl_v110.pc.txt <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.pl.bed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">## -v sets variables for the awk program like OFS</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">## OFS is the output field separator, we set this to a tab character</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">## We use an if statement to check if the strand column is 1 or -1 and print the appropriate strand symbol</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">## We then print the letters "chr" followed by column 1 ($1)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">## We then print columns 2, 3, 5 and a 0 for the BED score column</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">## Finally, we redirect the output to a new file called GRCm39_ensembl_v110.pc.edit.bed</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-v</span> OFS=<span class="st">'\t'</span> <span class="st">'{ if($4==1){ print "chr"$1,$2,$3,$5,0,"+" }else{ print "chr"$1,$2,$3,$5,0,"-" }}'</span> GRCm39_ensembl_v110.pc.txt <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.edit.bed</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">## We can get the same result using Perl, an alternative to awk</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">perl</span> <span class="at">-lane</span> <span class="st">'if($F[3]==1){$s="+";}else{$s="-";}; print "chr$F[0]\t$F[1]\t$F[2]\t$F[4]\t0\t$s";'</span> GRCm39_ensembl_v110.pc.txt <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.pl.bed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we can sort the file.</p>
 <div class="cell">
@@ -376,7 +377,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sort-using-keys" class="level3">
 <h3 class="anchored" data-anchor-id="sort-using-keys">Sort using keys</h3>
 <hr>
-<p>To sort the file by chromosome and then by start position we can use the <code>-k</code> flag to set sorting keys. The first k, k1 uses column 1 with the <code>-V</code> flag. This is a “version” sort which is alphanumeric and will put chr1 first. The second key, k2, uses column 2 with <code>-n</code> flag. This is a numerical sort and will place lower start positions first.</p>
+<p>To sort the file by chromosome and then by start position we can use the <code>-k</code> flag to set sorting keys. The first k, uses column 1 with the <code>-V</code> flag. This is a “version” sort which is alphanumeric and will put chr1 first. The second key, uses column 2 with <code>-n</code> flag. This is a numerical sort and will place lower start positions first.</p>
+<p>The <code>-k</code> flag takes a start and end column separated by a column. It is possible to use multiple columns as a key e.g.&nbsp;1,4. If you want to use a single column then repeat the column number as below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-k1,1V</span> <span class="at">-k2,2n</span> GRCm39_ensembl_v110.pc.edit.bed <span class="op">&gt;</span> GRCm39_ensembl_v110.pc.edit.sorted.bed</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>

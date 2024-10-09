@@ -19,12 +19,12 @@ website:
         text: Files
       - href: 04-processes.qmd
         text: Processes
-      - href: 07-manipulation.qmd
-        text: Text Manipulation
       - href: 05-analysis.qmd
         text: Analysis
       - href: 06-scripts.qmd
         text: Scripts
+      - href: 07-manipulation.qmd
+        text: Exercise
 
 format:
   html:

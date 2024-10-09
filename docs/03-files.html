@@ -150,16 +150,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Processes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./07-manipulation.html"> 
-<span class="menu-text">Text Manipulation</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./05-analysis.html"> 
 <span class="menu-text">Analysis</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./06-scripts.html"> 
 <span class="menu-text">Scripts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./07-manipulation.html"> 
+<span class="menu-text">Exercise</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -292,17 +292,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> grep <span class="at">-v</span> format bioinformatics_on_the_command_line_files/README</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> raw_yeast_rnaseq_data.fastq: This is a file containing 10,000 raw reads taken from a yeast RNA-Seq experiment</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> grep <span class="at">-c</span> <span class="at">-E</span> <span class="st">'^&gt;'</span> bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> grep <span class="at">-c</span> <span class="st">'^&gt;'</span> bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">17</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Note:</em> The <code>-E</code> flag in <code>grep</code> allows you to use a <em>regular expression</em> to specify a pattern that <code>grep</code> will look for rather than a fixed string. Conceptually, regular expressions are similar to glob patterns, although their syntax is different. Some characters have a special meaning in regular expressions. For example:</p>
+<p><em>Note:</em> <code>grep</code> allows you to use a <em>regular expressions</em> to specify a pattern that <code>grep</code> will look for rather than a fixed string. Conceptually, regular expressions are similar to glob patterns, although their syntax is different. Some characters have a special meaning in regular expressions. For example:</p>
 <ul>
 <li><code>^</code> represents the start of a string</li>
 <li><code>$</code> represents the end of a string</li>
-<li><code>.*</code> represents a sequence of zero or more characters</li>
-<li><code>.+</code> represents a sequence of one or more characters</li>
 </ul>
+<p>The <code>-E</code> and <code>-P</code> flags can be used to make more regular expressions available to <code>grep</code>.</p>
 <p>Files can be zipped (compressed) and unzipped (decompressed) with the <code>gzip</code> command:</p>
 <ul>
 <li><p><code>gzip -k</code> will compress a file and keep the original uncompressed version</p></li>

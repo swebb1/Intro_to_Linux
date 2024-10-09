@@ -102,7 +102,7 @@ We can do this as follows:
 ```{bash eval=F}
 [USERNAME]@bifx-core1:~/course$ cd bioinformatics_on_the_command_line_files
 [USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$ cut -f1 yeast_genes.bed | sort -u > yeast_genes_bed_chromosomes.list 
-[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$ grep -E '^>' yeast_genome.fasta | sort -u | cut -c2- > yeast_genome_fasta_chromosomes.list
+[USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$ grep '^>' yeast_genome.fasta | sort -u | cut -c2- > yeast_genome_fasta_chromosomes.list
 [USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$ wc -l *_chromosomes.list
  17 yeast_genes_bed_chromosomes.list
  17 yeast_genome_fasta_chromosomes.list
@@ -151,7 +151,7 @@ We can see that there is a mismatch between the chromosome names in the BED and 
 
 Before using these files in a bioinformatics analysis, we need to update one of them so that the names match. In the following example we fix the BED file by removing 'chr' from the start of each line.
 
-The example below uses the `sed` command, which is used to perform a search and replace style substitution on each line in the BED file using a regular expression. Here, as in the previous examples using `grep -E`, the '\^' character is a regular expression character representing the start of the line. We then confirm that the chromosomes are now the same using the `diff` command. This produces no output, which means that there are no differences between the chromosome lists.
+The example below uses the `sed` command, which is used to perform a search and replace style substitution on each line in the BED file using a regular expression. Here, as in the previous examples using `grep`, the '\^' character is a regular expression character representing the start of the line. We then confirm that the chromosomes are now the same using the `diff` command. This produces no output, which means that there are no differences between the chromosome lists.
 
 ```{bash eval=F}
 [USERNAME]@bifx-core1:~/course/bioinformatics_on_the_command_line_files$ sed 's/^chr//' yeast_genes.bed > yeast_genes.fixed.bed

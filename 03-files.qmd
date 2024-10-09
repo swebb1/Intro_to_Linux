@@ -99,18 +99,18 @@ This archive contains reference files for the 'Introduction to Bioinformatics on
 [USERNAME]@bifx-core1:~/course$ grep -v format bioinformatics_on_the_command_line_files/README
 
 - raw_yeast_rnaseq_data.fastq: This is a file containing 10,000 raw reads taken from a yeast RNA-Seq experiment
-[USERNAME]@bifx-core1:~/course$ grep -c -E '^>' bioinformatics_on_the_command_line_files/yeast_genome.fasta
+[USERNAME]@bifx-core1:~/course$ grep -c '^>' bioinformatics_on_the_command_line_files/yeast_genome.fasta
 17
 [USERNAME]@bifx-core1:~/course$
 
 ```
 
-*Note:* The `-E` flag in `grep` allows you to use a *regular expression* to specify a pattern that `grep` will look for rather than a fixed string. Conceptually, regular expressions are similar to glob patterns, although their syntax is different. Some characters have a special meaning in regular expressions. For example:
+*Note:* `grep` allows you to use a *regular expressions* to specify a pattern that `grep` will look for rather than a fixed string. Conceptually, regular expressions are similar to glob patterns, although their syntax is different. Some characters have a special meaning in regular expressions. For example:
 
 -   `^` represents the start of a string
 -   `$` represents the end of a string
--   `.*` represents a sequence of zero or more characters
--   `.+` represents a sequence of one or more characters
+
+The `-E` and `-P` flags can be used to make more regular expressions available to `grep`.
 
 Files can be zipped (compressed) and unzipped (decompressed) with the `gzip` command:
 

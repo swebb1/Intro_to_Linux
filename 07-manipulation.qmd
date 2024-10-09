@@ -18,7 +18,7 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ------------------------------------------------------------------------
 
-In this section we are going to use some common Unix tools to manipulate a genomic annotation file `GRCm39_ensembl_v110.txt`.
+In this section we are going to use common Unix tools to reformat a file containing genomic annotations (`GRCm39_ensembl_v110.txt`).
 
 ### Useful Unix tools
 
@@ -54,7 +54,7 @@ We would like to reformat this file to make it compatible with other genomic dat
 
 -   Select only protein coding genes
 
--   Output a UCSC style [BED file](https://en.wikipedia.org/wiki/BED_(file_format)), a standard genomic annotation format with six columns
+-   Output a UCSC style [BED file](https://en.wikipedia.org/wiki/BED_(file_format)), a standard genomic annotation format with six columns (chromosome, start, end, name, score, strand).
 
 ### Inspecting a file
 
@@ -183,13 +183,14 @@ We now need to reformat the strand column to contain +/-. We can use `awk` to do
 We will also add "chr" to the chromosome column and reorder the columns to match the standard BED format.
 
 ```{bash eval =F}
+## -v sets variables for the awk program like OFS
 ## OFS is the output field separator, we set this to a tab character
 ## We use an if statement to check if the strand column is 1 or -1 and print the appropriate strand symbol
 ## We then print the letters "chr" followed by column 1 ($1)
 ## We then print columns 2, 3, 5 and a 0 for the BED score column
 ## Finally, we redirect the output to a new file called GRCm39_ensembl_v110.pc.edit.bed
 
-awk '{ OFS="\t" }{ if($4==1){ print "chr"$1,$2,$3,$5,0,"+" }else{ print "chr"$1,$2,$3,$5,0,"-" }}' GRCm39_ensembl_v110.pc.txt > GRCm39_ensembl_v110.pc.edit.bed
+awk -v OFS='\t' '{ if($4==1){ print "chr"$1,$2,$3,$5,0,"+" }else{ print "chr"$1,$2,$3,$5,0,"-" }}' GRCm39_ensembl_v110.pc.txt > GRCm39_ensembl_v110.pc.edit.bed
 
 ## We can get the same result using Perl, an alternative to awk
 perl -lane 'if($F[3]==1){$s="+";}else{$s="-";}; print "chr$F[0]\t$F[1]\t$F[2]\t$F[4]\t0\t$s";' GRCm39_ensembl_v110.pc.txt > GRCm39_ensembl_v110.pc.pl.bed
@@ -210,7 +211,9 @@ man sort
 
 ------------------------------------------------------------------------
 
-To sort the file by chromosome and then by start position we can use the `-k` flag to set sorting keys. The first k, k1 uses column 1 with the `-V` flag. This is a "version" sort which is alphanumeric and will put chr1 first. The second key, k2, uses column 2 with `-n` flag. This is a numerical sort and will place lower start positions first.
+To sort the file by chromosome and then by start position we can use the `-k` flag to set sorting keys. The first k, uses column 1 with the `-V` flag. This is a "version" sort which is alphanumeric and will put chr1 first. The second key, uses column 2 with `-n` flag. This is a numerical sort and will place lower start positions first.
+
+The `-k` flag takes a start and end column separated by a column. It is possible to use multiple columns as a key e.g. 1,4. If you want to use a single column then repeat the column number as below.
 
 ```{bash eval =F}
 sort -k1,1V -k2,2n GRCm39_ensembl_v110.pc.edit.bed > GRCm39_ensembl_v110.pc.edit.sorted.bed
