@@ -10,6 +10,7 @@ format:
 ```{=html}
 <script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
 ```
+
 </head>
 
 ```{r global_options, include=FALSE}
@@ -57,7 +58,7 @@ By looking at the output columns, we can see the following:
     -   The parent of a process is the process that started it. In our case, the `ps -fly` process was started by the `bash` process
     -   You can see this by observing that the *PPID* of the `ps -fly` process is the same as the *PID* of the `bash` process
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 Use `htop` to find the following:
@@ -81,7 +82,7 @@ Run `htop -u [USERNAME]` to start `htop` and display only your own processes. At
 :::
 
 </details>
-:::
+::::
 
 ## Job control
 
@@ -163,7 +164,7 @@ The following example shows how to move a foreground job to the background and d
 
 The example shows that when the `sleep 10000` job is disowned it is removed from the `jobs` list, but the process keeps running.
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 How could you terminate a foreground job without using <kbd>Ctrl+c</kbd>?
@@ -179,11 +180,11 @@ One way would be to pause the job with <kbd>Ctrl+z</kbd>, and then use `kill -IN
 :::
 
 </details>
-:::
+::::
 
 <br>
 
-::: challenge
+:::: challenge
 <h2><i class="fas fa-pencil-alt"></i> Challenge:</h2>
 
 How could you restart a stopped job that has been disowned?
@@ -199,4 +200,4 @@ You could use `htop` or `ps` to find the process IDs of the stopped processes, a
 :::
 
 </details>
-:::
+::::

@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="editing-scripts">Editing scripts</h3>
 <p>You can edit your scripts using a text editor such as <em>emacs</em> or <em>vim</em>.</p>
 <ul>
-<li><code>emacs</code> opens emacs
+<li><code>emacs -nw</code> opens emacs in the terminal
 <ul>
 <li>you can then take the tutorial by typing Ctrl+h t</li>
 </ul></li>
@@ -357,158 +357,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We can see that this works by running the above file (which is saved on the server as ‘/library/training/Intro_to_Linux/analysis_raw.sh’):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ls</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">analysis</span>  bioinformatics_on_the_command_line_files  bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> mv analysis interactive_analysis</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ls</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files</span>  bioinformatics_on_the_command_line_files.tar.gz  interactive_analysis</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> bash /library/training/Intro_to_Linux/analysis_raw.sh</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> 00_source_data</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> directory, 1 file</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:45 ..... started STAR run</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:45 ... starting to generate Genome files</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:46 ... starting to sort Suffix Array. This may take a long time...</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:46 ... sorting Suffix Array chunks and saving them to disk...</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:54 ... loading chunks from disk, packing SA...</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:55 ... finished generating suffix array</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:55 ... generating Suffix Array index</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:56 ... completed Suffix Array index</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:56 ... writing Genome to disk ...</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:56 ... writing Suffix Array to disk ...</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:57 ... writing SAindex to disk</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:57 ..... finished successfully</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> 01_star_index</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> chrLength.txt</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> chrNameLength.txt</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> chrName.txt</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> chrStart.txt</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> Genome</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> genomeParameters.txt</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> Log.out</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> SA</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> SAindex</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> yeast_genome.fasta <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> directories, 11 files</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:57 ..... started STAR run</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:57 ..... loading genome</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:23:57 ..... started mapping</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:24:00 ..... finished mapping</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:24:00 ..... started sorting BAM</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:24:00 ..... finished successfully</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 01_star_index</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrLength.txt</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrNameLength.txt</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrName.txt</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrStart.txt</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── Genome</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── genomeParameters.txt</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── Log.out</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── SA</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── SAindex</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> 02_aligned_reads</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> raw_yeast_rnaseq_data.Log.final.out</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> raw_yeast_rnaseq_data.Log.out</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> raw_yeast_rnaseq_data.Log.progress.out</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> raw_yeast_rnaseq_data.SJ.out.tab</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> raw_yeast_rnaseq_data._STARtmp</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>        <span class="ex">└──</span> BAMsort</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>            <span class="ex">├──</span> 0</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>            <span class="ex">├──</span> 1</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>            <span class="ex">├──</span> 2</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>            <span class="ex">├──</span> 3</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>            <span class="ex">└──</span> 4</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="ex">10</span> directories, 16 files</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 01_star_index</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrLength.txt</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrNameLength.txt</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrName.txt</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrStart.txt</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── Genome</span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── genomeParameters.txt</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── Log.out</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── SA</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── SAindex</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 02_aligned_reads</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Log.final.out</span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Log.out</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Log.progress.out</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.SJ.out.tab</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data._STARtmp</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── BAMsort</span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 0</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 1</span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 2</span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 3</span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         └── 4</span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> 03_coverage</span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> raw_yeast_rnaseq_data.genomecov.bg</span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="ex">11</span> directories, 17 files</span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span></span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 00_source_data</span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.fastq <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq</span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 01_star_index</span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrLength.txt</span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrNameLength.txt</span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrName.txt</span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── chrStart.txt</span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── Genome</span>
-<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── genomeParameters.txt</span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── Log.out</span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── SA</span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── SAindex</span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── yeast_genome.fasta <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta</span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 02_aligned_reads</span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam</span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Log.final.out</span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Log.out</span>
-<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.Log.progress.out</span>
-<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> ├── raw_yeast_rnaseq_data.SJ.out.tab</span>
-<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data._STARtmp</span>
-<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── BAMsort</span>
-<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 0</span>
-<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 1</span>
-<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 2</span>
-<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         ├── 3</span>
-<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>         └── 4</span>
-<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> 03_coverage</span>
-<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── raw_yeast_rnaseq_data.genomecov.bg</span>
-<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> 04_gene_overlap_counts</span>
-<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> raw_yeast_overlap_data.gene_overlap_counts.bed</span>
-<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> yeast_genes.fixed.bed <span class="at">-</span><span class="op">&gt;</span> ../../bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed</span>
-<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a><span class="ex">12</span> directories, 19 files</span>
-<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 460922  466869  RDN37-2 .   <span class="at">-</span>   3730</span>
-<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 451785  457732  RDN37-1 .   <span class="at">-</span>   3582</span>
-<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 468812  468931  RDN5-2  .   +   3063</span>
-<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 468826  468958  YLR154C-H   .   <span class="at">-</span>   3063</span>
-<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 472464  472583  RDN5-3  .   +   3060</span>
-<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 472478  472610  YLR156C-A   .   <span class="at">-</span>   3060</span>
-<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 482044  482163  RDN5-4  .   +   3055</span>
-<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 482058  482190  YLR157C-C   .   <span class="at">-</span>   3055</span>
-<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 485696  485815  RDN5-5  .   +   3052</span>
-<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="ex">XII</span> 485710  485842  YLR159C-A   .   <span class="at">-</span>   3052</span>
-<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Rename the analysis folder as interactive_analysis</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> analysis interactive_analysis</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Run the bash script</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> /library/training/Intro_to_Linux/analysis_raw.sh</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Inspect the output</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>You should see that the script runs successfully, prints messages to the screen as it goes and creates a number of output files.</p>
 </section>
 <section id="creating-an-improved-data-analysis-script" class="level3">
 <h3 class="anchored" data-anchor-id="creating-an-improved-data-analysis-script">Creating an improved data analysis script</h3>
@@ -626,49 +484,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Again, we can see that this works by running the above file (which is saved on the server as ‘/library/training/Intr_to_Linux/analysis_improved.sh’):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ls</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">analysis</span>  bioinformatics_on_the_command_line_files  bioinformatics_on_the_command_line_files.tar.gz interactive_analysis</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> mv analysis analysis_raw</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> ls</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">analysis_raw</span>                              bioinformatics_on_the_command_line_files.tar.gz</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bioinformatics_on_the_command_line_files</span>  interactive_analysis</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> bash /library/training/Intro_to_Linux/analysis_improved.sh</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Creating</span> STAR index...</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:09 ..... started STAR run</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:09 ... starting to generate Genome files</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:10 ... starting to sort Suffix Array. This may take a long time...</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:10 ... sorting Suffix Array chunks and saving them to disk...</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:18 ... loading chunks from disk, packing SA...</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:19 ... finished generating suffix array</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:19 ... generating Suffix Array index</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:20 ... completed Suffix Array index</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:20 ... writing Genome to disk ...</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:20 ... writing Suffix Array to disk ...</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:21 ... writing SAindex to disk</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:21 ..... finished successfully</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Aligning</span> raw reads...</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:21 ..... started STAR run</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:21 ..... loading genome</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:21 ..... started mapping</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:24 ..... finished mapping</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:24 ..... started sorting BAM</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="ex">Nov</span> 16 16:38:24 ..... finished successfully</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="ex">Creating</span> genome coverage file...</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="ex">Computing</span> gene overlap counts...</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="ex">Pipeline</span> completed successfully.</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> cat analysis/run_report.txt</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="ex">/library/training/Intro_to_Linux/analysis_improved.sh</span> run completed successfully.</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="ex">Mon</span> 16 Nov 16:38:36 GMT 2020</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="ex">Software</span> versions:</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ex">2.7.3a</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="ex">bedtools</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="ex">v2.27.0</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">GNU</span> coreutils<span class="kw">)</span> <span class="ex">8.28</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="ex">GNU</span> Awk 4.1.4, API: 1.1 <span class="er">(</span><span class="ex">GNU</span> MPFR 4.0.1, GNU MP 6.1.2<span class="kw">)</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="ex">[USERNAME]@bifx-core1:~/course$</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Rename the analysis folder as analysis_raw</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> analysis analysis_raw</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Run the improved bash script</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> /library/training/Intro_to_Linux/analysis_improved.sh</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Read the output report</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> analysis/run_report.txt</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Inspect the output</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="managing-your-scripts" class="level3">

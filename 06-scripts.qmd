@@ -10,6 +10,7 @@ format:
 ```{=html}
 <script src="https://kit.fontawesome.com/ece750edd7.js" crossorigin="anonymous"></script>
 ```
+
 </head>
 
 ```{r global_options, include=FALSE}
@@ -86,7 +87,7 @@ GRCm38	mm10  mm9  UCSC
 
 You can edit your scripts using a text editor such as *emacs* or *vim*.
 
--   `emacs` opens emacs
+-   `emacs -nw` opens emacs in the terminal
     -   you can then take the tutorial by typing Ctrl+h t
 -   `vim` opens vim
     -   you can take a tutorial by running the `vimtutor` command at the bash prompt
@@ -150,158 +151,17 @@ cd ..
 We can see that this works by running the above file (which is saved on the server as '/library/training/Intro_to_Linux/analysis_raw.sh'):
 
 ```{bash eval=F}
-[USERNAME]@bifx-core1:~/course$ ls
-analysis  bioinformatics_on_the_command_line_files  bioinformatics_on_the_command_line_files.tar.gz
-[USERNAME]@bifx-core1:~/course$ mv analysis interactive_analysis
-[USERNAME]@bifx-core1:~/course$ ls
-bioinformatics_on_the_command_line_files  bioinformatics_on_the_command_line_files.tar.gz  interactive_analysis
-[USERNAME]@bifx-core1:~/course$ bash /library/training/Intro_to_Linux/analysis_raw.sh
-.
-└── 00_source_data
-    └── raw_yeast_rnaseq_data.fastq -> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
+## Rename the analysis folder as interactive_analysis
+mv analysis interactive_analysis
 
-1 directory, 1 file
-Nov 16 16:23:45 ..... started STAR run
-Nov 16 16:23:45 ... starting to generate Genome files
-Nov 16 16:23:46 ... starting to sort Suffix Array. This may take a long time...
-Nov 16 16:23:46 ... sorting Suffix Array chunks and saving them to disk...
-Nov 16 16:23:54 ... loading chunks from disk, packing SA...
-Nov 16 16:23:55 ... finished generating suffix array
-Nov 16 16:23:55 ... generating Suffix Array index
-Nov 16 16:23:56 ... completed Suffix Array index
-Nov 16 16:23:56 ... writing Genome to disk ...
-Nov 16 16:23:56 ... writing Suffix Array to disk ...
-Nov 16 16:23:57 ... writing SAindex to disk
-Nov 16 16:23:57 ..... finished successfully
-.
-├── 00_source_data
-│   └── raw_yeast_rnaseq_data.fastq -> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
-└── 01_star_index
-    ├── chrLength.txt
-    ├── chrNameLength.txt
-    ├── chrName.txt
-    ├── chrStart.txt
-    ├── Genome
-    ├── genomeParameters.txt
-    ├── Log.out
-    ├── SA
-    ├── SAindex
-    └── yeast_genome.fasta -> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta
+## Run the bash script
+bash /library/training/Intro_to_Linux/analysis_raw.sh
 
-2 directories, 11 files
-Nov 16 16:23:57 ..... started STAR run
-Nov 16 16:23:57 ..... loading genome
-Nov 16 16:23:57 ..... started mapping
-Nov 16 16:24:00 ..... finished mapping
-Nov 16 16:24:00 ..... started sorting BAM
-Nov 16 16:24:00 ..... finished successfully
-.
-├── 00_source_data
-│   └── raw_yeast_rnaseq_data.fastq -> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
-├── 01_star_index
-│   ├── chrLength.txt
-│   ├── chrNameLength.txt
-│   ├── chrName.txt
-│   ├── chrStart.txt
-│   ├── Genome
-│   ├── genomeParameters.txt
-│   ├── Log.out
-│   ├── SA
-│   ├── SAindex
-│   └── yeast_genome.fasta -> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta
-└── 02_aligned_reads
-    ├── raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam
-    ├── raw_yeast_rnaseq_data.Log.final.out
-    ├── raw_yeast_rnaseq_data.Log.out
-    ├── raw_yeast_rnaseq_data.Log.progress.out
-    ├── raw_yeast_rnaseq_data.SJ.out.tab
-    └── raw_yeast_rnaseq_data._STARtmp
-        └── BAMsort
-            ├── 0
-            ├── 1
-            ├── 2
-            ├── 3
-            └── 4
-
-10 directories, 16 files
-.
-├── 00_source_data
-│   └── raw_yeast_rnaseq_data.fastq -> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
-├── 01_star_index
-│   ├── chrLength.txt
-│   ├── chrNameLength.txt
-│   ├── chrName.txt
-│   ├── chrStart.txt
-│   ├── Genome
-│   ├── genomeParameters.txt
-│   ├── Log.out
-│   ├── SA
-│   ├── SAindex
-│   └── yeast_genome.fasta -> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta
-├── 02_aligned_reads
-│   ├── raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam
-│   ├── raw_yeast_rnaseq_data.Log.final.out
-│   ├── raw_yeast_rnaseq_data.Log.out
-│   ├── raw_yeast_rnaseq_data.Log.progress.out
-│   ├── raw_yeast_rnaseq_data.SJ.out.tab
-│   └── raw_yeast_rnaseq_data._STARtmp
-│       └── BAMsort
-│           ├── 0
-│           ├── 1
-│           ├── 2
-│           ├── 3
-│           └── 4
-└── 03_coverage
-    └── raw_yeast_rnaseq_data.genomecov.bg
-
-11 directories, 17 files
-.
-├── 00_source_data
-│   └── raw_yeast_rnaseq_data.fastq -> ../../bioinformatics_on_the_command_line_files/raw_yeast_rnaseq_data.fastq
-├── 01_star_index
-│   ├── chrLength.txt
-│   ├── chrNameLength.txt
-│   ├── chrName.txt
-│   ├── chrStart.txt
-│   ├── Genome
-│   ├── genomeParameters.txt
-│   ├── Log.out
-│   ├── SA
-│   ├── SAindex
-│   └── yeast_genome.fasta -> ../../bioinformatics_on_the_command_line_files/yeast_genome.fasta
-├── 02_aligned_reads
-│   ├── raw_yeast_rnaseq_data.Aligned.sortedByCoord.out.bam
-│   ├── raw_yeast_rnaseq_data.Log.final.out
-│   ├── raw_yeast_rnaseq_data.Log.out
-│   ├── raw_yeast_rnaseq_data.Log.progress.out
-│   ├── raw_yeast_rnaseq_data.SJ.out.tab
-│   └── raw_yeast_rnaseq_data._STARtmp
-│       └── BAMsort
-│           ├── 0
-│           ├── 1
-│           ├── 2
-│           ├── 3
-│           └── 4
-├── 03_coverage
-│   └── raw_yeast_rnaseq_data.genomecov.bg
-└── 04_gene_overlap_counts
-    ├── raw_yeast_overlap_data.gene_overlap_counts.bed
-    └── yeast_genes.fixed.bed -> ../../bioinformatics_on_the_command_line_files/yeast_genes.fixed.bed
-
-12 directories, 19 files
-XII	460922	466869	RDN37-2	.	-	3730
-XII	451785	457732	RDN37-1	.	-	3582
-XII	468812	468931	RDN5-2	.	+	3063
-XII	468826	468958	YLR154C-H	.	-	3063
-XII	472464	472583	RDN5-3	.	+	3060
-XII	472478	472610	YLR156C-A	.	-	3060
-XII	482044	482163	RDN5-4	.	+	3055
-XII	482058	482190	YLR157C-C	.	-	3055
-XII	485696	485815	RDN5-5	.	+	3052
-XII	485710	485842	YLR159C-A	.	-	3052
-
-[USERNAME]@bifx-core1:~/course$ 
+## Inspect the output
+tree analysis
 ```
+
+You should see that the script runs successfully, prints messages to the screen as it goes and creates a number of output files.
 
 ### Creating an improved data analysis script
 
@@ -418,49 +278,17 @@ echo 'Pipeline completed successfully.'
 Again, we can see that this works by running the above file (which is saved on the server as '/library/training/Intr_to_Linux/analysis_improved.sh'):
 
 ```{bash eval=F}
-[USERNAME]@bifx-core1:~/course$ ls
-analysis  bioinformatics_on_the_command_line_files  bioinformatics_on_the_command_line_files.tar.gz interactive_analysis
-[USERNAME]@bifx-core1:~/course$ mv analysis analysis_raw
-[USERNAME]@bifx-core1:~/course$ ls
-analysis_raw                              bioinformatics_on_the_command_line_files.tar.gz
-bioinformatics_on_the_command_line_files  interactive_analysis
-[USERNAME]@bifx-core1:~/course$ bash /library/training/Intro_to_Linux/analysis_improved.sh
-Creating STAR index...
-Nov 16 16:38:09 ..... started STAR run
-Nov 16 16:38:09 ... starting to generate Genome files
-Nov 16 16:38:10 ... starting to sort Suffix Array. This may take a long time...
-Nov 16 16:38:10 ... sorting Suffix Array chunks and saving them to disk...
-Nov 16 16:38:18 ... loading chunks from disk, packing SA...
-Nov 16 16:38:19 ... finished generating suffix array
-Nov 16 16:38:19 ... generating Suffix Array index
-Nov 16 16:38:20 ... completed Suffix Array index
-Nov 16 16:38:20 ... writing Genome to disk ...
-Nov 16 16:38:20 ... writing Suffix Array to disk ...
-Nov 16 16:38:21 ... writing SAindex to disk
-Nov 16 16:38:21 ..... finished successfully
-Aligning raw reads...
-Nov 16 16:38:21 ..... started STAR run
-Nov 16 16:38:21 ..... loading genome
-Nov 16 16:38:21 ..... started mapping
-Nov 16 16:38:24 ..... finished mapping
-Nov 16 16:38:24 ..... started sorting BAM
-Nov 16 16:38:24 ..... finished successfully
-Creating genome coverage file...
-Computing gene overlap counts...
-Pipeline completed successfully.
-[USERNAME]@bifx-core1:~/course$ cat analysis/run_report.txt
-/library/training/Intro_to_Linux/analysis_improved.sh run completed successfully.
-Mon 16 Nov 16:38:36 GMT 2020
-Software versions:
-STAR
-2.7.3a
-bedtools
-v2.27.0
-sort
-(GNU coreutils) 8.28
-awk
-GNU Awk 4.1.4, API: 1.1 (GNU MPFR 4.0.1, GNU MP 6.1.2)
-[USERNAME]@bifx-core1:~/course$ 
+## Rename the analysis folder as analysis_raw
+mv analysis analysis_raw
+
+## Run the improved bash script
+bash /library/training/Intro_to_Linux/analysis_improved.sh
+
+## Read the output report
+cat analysis/run_report.txt
+
+## Inspect the output
+tree analysis
 ```
 
 ### Managing your scripts
