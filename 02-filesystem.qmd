@@ -289,7 +289,7 @@ ls
 ## List the contents of the directory including hidden files and using human readable file sizes
 ls -lah
 
-## List the all files ending .gz
+## List all files ending .gz
 ls -lah *.gz
 
 ## Find all files ending .bed in the mm10 genomess directory

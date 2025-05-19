@@ -262,8 +262,8 @@ A third way would be to either hit the up arrow to scroll back through the histo
 ::: resources
 <h2><i class="fas fa-thumbtack"></i> Resources</h2>
 
-Although Linux has thousands of commands, there are a few that are used most of the time. Even so, it can be daunting to try to memorise new Linux commands. The cheat sheet below is a really handy resource to get you started on the command line.
+Although Unix has thousands of commands, there are a few that are used most of the time. Even so, it can be daunting to try to memorise new Linux commands. The cheat sheet below is a really handy resource to get you started on the command line.
 
--   [Linux command cheat sheet](https://upload.wikimedia.org/wikipedia/commons/7/79/Unix_command_cheatsheet.pdf)
+-   [Unix command cheat sheet](https://upload.wikimedia.org/wikipedia/commons/7/79/Unix_command_cheatsheet.pdf)
 
 :::
